@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface LiderZespoluRepository
         extends JpaRepository<com.example.mas.liderZespolu.LiderZespolu, Long> {
 
-    @Query("SELECT s FROM LiderZespolu s WHERE s.id = ?1")
+    @Query("SELECT s FROM PracownikStudia s WHERE s.id = ?1")
     Optional<com.example.mas.liderZespolu.LiderZespolu> findLiderZespoluById(Long id);
 
 }

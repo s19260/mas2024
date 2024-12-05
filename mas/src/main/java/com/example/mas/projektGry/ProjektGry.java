@@ -3,6 +3,8 @@ package com.example.mas.projektGry;
 import com.example.mas.liderZespolu.LiderZespolu;
 import com.example.mas.pracownikStudia.PracownikStudia;
 import java.util.List;
+import java.util.Optional;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,10 +17,14 @@ public class ProjektGry {
             sequenceName = "projektgry_sequence",
             allocationSize = 1
     )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "projektgry_sequence"
+    )
+
 
     private Long id;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "lider_zespolu_id", nullable = false)
+    @ManyToOne
     private LiderZespolu liderZespolu;
     @OneToMany
     private List<PracownikStudia> przypisaniPracownicy;
@@ -46,9 +52,15 @@ public class ProjektGry {
         this.wymaganySprzet = wymaganySprzet;
     }
 
-    public ProjektGry() {
-
+    public ProjektGry(LiderZespolu liderZespolu) {
+        this.liderZespolu = liderZespolu;
     }
+
+    public ProjektGry() {
+    }
+
+//    public ProjektGry(Optional<PracownikStudia> pracownikStudiaById) {
+//    }
 
     public Long getId() {
         return id;
