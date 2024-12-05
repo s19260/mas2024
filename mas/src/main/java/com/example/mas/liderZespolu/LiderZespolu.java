@@ -2,6 +2,8 @@ package com.example.mas.liderZespolu;
 
 import com.example.mas.pracownikStudia.PracownikStudia;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 

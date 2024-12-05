@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table
 public abstract class PracownikStudia {
 
     @Id

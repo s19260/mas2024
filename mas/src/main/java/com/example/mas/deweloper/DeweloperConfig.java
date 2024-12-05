@@ -2,16 +2,21 @@ package com.example.mas.deweloper;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
 @Configuration
+@Component("deweloperConfig")
 public class DeweloperConfig {
 
     @Bean
+    @DependsOn("liderZespoluConfig")
     CommandLineRunner commandLineRunnerD(com.example.mas.deweloper.DeweloperRepository repository) {
         return args -> {
             Deweloper marcin = new Deweloper(
