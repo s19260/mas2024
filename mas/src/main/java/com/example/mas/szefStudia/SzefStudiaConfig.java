@@ -1,4 +1,4 @@
-package com.example.mas.przedstawicielWydawcy;
+package com.example.mas.szefStudia;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -9,14 +9,14 @@ import java.time.Month;
 import java.util.List;
 
 @Configuration
-public class PrzedstawicielWydawcyConfig {
+public class SzefStudiaConfig {
 
     @Bean
-    CommandLineRunner commandLineRunnerPrzedstawicielWydawcy(com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository repository) {
+    CommandLineRunner commandLineRunnerSzefStudia(com.example.mas.szefStudia.SzefStudiaRepository repository) {
         return args -> {
-            PrzedstawicielWydawcy marian = new PrzedstawicielWydawcy(
-                    "Marian",
-                    "Pazdzioch",
+            SzefStudia janusz = new SzefStudia(
+                    "Janusz",
+                    "Iksinski",
                     LocalDate.of(2024, Month.NOVEMBER, 5),
                     "Dolna 52, Warszawa",
                     true,
@@ -25,7 +25,7 @@ public class PrzedstawicielWydawcyConfig {
 
 
             repository.saveAll(
-                    List.of(marian)
+                    List.of(janusz)
             );
         };
     }

@@ -1,8 +1,22 @@
 package com.example.mas.zlecenieProjektu;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class ZlecenieProjektu {
+    @Id
+    @SequenceGenerator(
+            name = "zlecenieprojektu_sequence",
+            sequenceName = "zlecenieprojektu_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "zlecenieprojektu_sequence"
+    )
+    private Long id;
     private LocalDate planowanaDataZakonczeniaZlecenia;
     private String rodzajGry;
     private String platformaDocelowa;
@@ -18,6 +32,11 @@ public class ZlecenieProjektu {
         this.przewidywanaIloscPracownikow = przewidywanaIloscPracownikow;
         this.status = status;
     }
+
+    public ZlecenieProjektu() {
+
+    }
+
     public LocalDate getPlanowanaDataZakonczeniaZlecenia() {
         return planowanaDataZakonczeniaZlecenia;
     }
@@ -76,5 +95,13 @@ public class ZlecenieProjektu {
                 ", przewidywanaIloscPracownikow=" + przewidywanaIloscPracownikow +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

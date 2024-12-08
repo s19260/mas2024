@@ -17,15 +17,25 @@ public class ProjektGryConfig {
         return args -> {
             ProjektGry crash = new ProjektGry(
                     liderZespoluRepository.findLiderZespoluById(1L).get(),
-                    List.of(pracownikStudiaRepository.findPracownikStudiaById(2L).get()),
+                    List.of(pracownikStudiaRepository.findPracownikStudiaById(2L).get(),pracownikStudiaRepository.findPracownikStudiaById(3L).get()),
+                    12L,
+                    1,
+                    2,
+                    "xbox"
+            );
+
+            ProjektGry crash2 = new ProjektGry(
+                    liderZespoluRepository.findLiderZespoluById(1L).get(),
+                    List.of(pracownikStudiaRepository.findPracownikStudiaById(2L).get(),pracownikStudiaRepository.findPracownikStudiaById(3L).get()),
                     12L,
                     1,
                     2,
                     "dupa"
             );
 
+
             repository.saveAll(
-                    List.of(crash)
+                    List.of(crash, crash2)
             );
         };
     }

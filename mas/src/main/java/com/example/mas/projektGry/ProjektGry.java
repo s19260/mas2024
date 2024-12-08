@@ -3,7 +3,6 @@ package com.example.mas.projektGry;
 import com.example.mas.liderZespolu.LiderZespolu;
 import com.example.mas.pracownikStudia.PracownikStudia;
 import java.util.List;
-import java.util.Optional;
 
 import jakarta.persistence.*;
 
@@ -26,7 +25,7 @@ public class ProjektGry {
     private Long id;
     @ManyToOne
     private LiderZespolu liderZespolu;
-    @OneToMany
+    @ManyToMany
     private List<PracownikStudia> przypisaniPracownicy;
     private Long budzet;
     private double kosztMarketingu;

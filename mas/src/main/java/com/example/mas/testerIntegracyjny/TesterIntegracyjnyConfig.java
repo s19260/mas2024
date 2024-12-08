@@ -1,4 +1,4 @@
-package com.example.mas.przedstawicielWydawcy;
+package com.example.mas.testerIntegracyjny;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -9,14 +9,14 @@ import java.time.Month;
 import java.util.List;
 
 @Configuration
-public class PrzedstawicielWydawcyConfig {
+public class TesterIntegracyjnyConfig {
 
     @Bean
-    CommandLineRunner commandLineRunnerPrzedstawicielWydawcy(com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository repository) {
+    CommandLineRunner commandLineRunnerTesterIntegracyjny(com.example.mas.testerIntegracyjny.TesterIntegracyjnyRepository repository) {
         return args -> {
-            PrzedstawicielWydawcy marian = new PrzedstawicielWydawcy(
-                    "Marian",
-                    "Pazdzioch",
+            TesterIntegracyjny janusz = new TesterIntegracyjny(
+                    "Janusz",
+                    "Iksinski",
                     LocalDate.of(2024, Month.NOVEMBER, 5),
                     "Dolna 52, Warszawa",
                     true,
@@ -25,7 +25,7 @@ public class PrzedstawicielWydawcyConfig {
 
 
             repository.saveAll(
-                    List.of(marian)
+                    List.of(janusz)
             );
         };
     }

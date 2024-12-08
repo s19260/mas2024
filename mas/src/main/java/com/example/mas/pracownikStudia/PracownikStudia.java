@@ -1,6 +1,7 @@
 package com.example.mas.pracownikStudia;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
@@ -17,6 +18,7 @@ public abstract class PracownikStudia {
             strategy = GenerationType.SEQUENCE,
             generator = "pracownikstudia_sequence"
     )
+
     private Long id;
     private String imie;
     private String nazwisko;
