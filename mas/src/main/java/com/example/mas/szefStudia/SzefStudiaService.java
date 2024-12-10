@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class SzefStudiaService {
@@ -21,9 +22,10 @@ public class SzefStudiaService {
         return szefStudiaRepository.findAll();
     }
 
-    public void addNewSzefStudia(com.example.mas.szefStudia.SzefStudia szefStudia) {
+    public SzefStudia addNewSzefStudia(SzefStudia szefStudia) {
         System.out.println(szefStudia);
         szefStudiaRepository.save(szefStudia);
+        return szefStudia;
     }
 
     public void deleteSzefStudia(Long szefStudiaId) {
@@ -36,15 +38,23 @@ public class SzefStudiaService {
     }
 
     @Transactional
-    public void updateSzefStudia(Long szefStudiaId,
-                                 String imie) {
-        com.example.mas.szefStudia.SzefStudia szefStudia = szefStudiaRepository.findById(szefStudiaId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + szefStudiaId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, szefStudia.getImie())) {
-            szefStudia.setImie(imie);
-        }
+//    public void updateSzefStudia(Long szefStudiaId,
+//                                String imie) {
+//        com.example.mas.szefStudia.SzefStudia szefStudia = szefStudiaRepository.findById(szefStudiaId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + szefStudiaId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, szefStudia.getImie())) {
+//            szefStudia.setImie(imie);
+//        }
+//    }
+
+    public Optional<SzefStudia> updateSzefStudia(SzefStudia szefStudia) {
+        Optional<SzefStudia> znajdzSzefStudia = szefStudiaRepository.findById(szefStudia.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzSzefStudia;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TesterIntegracyjnyService {
@@ -21,9 +22,10 @@ public class TesterIntegracyjnyService {
         return testerIntegracyjnyRepository.findAll();
     }
 
-    public void addNewTesterIntegracyjny(com.example.mas.testerIntegracyjny.TesterIntegracyjny testerIntegracyjny) {
+    public TesterIntegracyjny addNewTesterIntegracyjny(TesterIntegracyjny testerIntegracyjny) {
         System.out.println(testerIntegracyjny);
         testerIntegracyjnyRepository.save(testerIntegracyjny);
+        return testerIntegracyjny;
     }
 
     public void deleteTesterIntegracyjny(Long testerIntegracyjnyId) {
@@ -36,15 +38,23 @@ public class TesterIntegracyjnyService {
     }
 
     @Transactional
-    public void updateTesterIntegracyjny(Long testerIntegracyjnyId,
-                                         String imie) {
-        com.example.mas.testerIntegracyjny.TesterIntegracyjny testerIntegracyjny = testerIntegracyjnyRepository.findById(testerIntegracyjnyId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + testerIntegracyjnyId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, testerIntegracyjny.getImie())) {
-            testerIntegracyjny.setImie(imie);
-        }
+//    public void updateTesterIntegracyjny(Long testerIntegracyjnyId,
+//                                String imie) {
+//        com.example.mas.testerIntegracyjny.TesterIntegracyjny testerIntegracyjny = testerIntegracyjnyRepository.findById(testerIntegracyjnyId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + testerIntegracyjnyId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, testerIntegracyjny.getImie())) {
+//            testerIntegracyjny.setImie(imie);
+//        }
+//    }
+
+    public Optional<TesterIntegracyjny> updateTesterIntegracyjny(TesterIntegracyjny testerIntegracyjny) {
+        Optional<TesterIntegracyjny> znajdzTesterIntegracyjny = testerIntegracyjnyRepository.findById(testerIntegracyjny.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzTesterIntegracyjny;
     }
 }

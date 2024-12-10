@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TesterService {
@@ -21,9 +22,10 @@ public class TesterService {
         return testerRepository.findAll();
     }
 
-    public void addNewTester(com.example.mas.tester.Tester tester) {
+    public Tester addNewTester(Tester tester) {
         System.out.println(tester);
         testerRepository.save(tester);
+        return tester;
     }
 
     public void deleteTester(Long testerId) {
@@ -36,15 +38,23 @@ public class TesterService {
     }
 
     @Transactional
-    public void updateTester(Long testerId,
-                             String imie) {
-        com.example.mas.tester.Tester tester = testerRepository.findById(testerId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + testerId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, tester.getImie())) {
-            tester.setImie(imie);
-        }
+//    public void updateTester(Long testerId,
+//                                String imie) {
+//        com.example.mas.tester.Tester tester = testerRepository.findById(testerId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + testerId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, tester.getImie())) {
+//            tester.setImie(imie);
+//        }
+//    }
+
+    public Optional<Tester> updateTester(Tester tester) {
+        Optional<Tester> znajdzTester = testerRepository.findById(tester.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzTester;
     }
 }

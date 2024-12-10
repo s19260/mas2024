@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DeweloperService {
@@ -21,9 +22,10 @@ public class DeweloperService {
         return deweloperRepository.findAll();
     }
 
-    public void addNewDeweloper(com.example.mas.deweloper.Deweloper deweloper) {
+    public Deweloper addNewDeweloper(Deweloper deweloper) {
         System.out.println(deweloper);
         deweloperRepository.save(deweloper);
+        return deweloper;
     }
 
     public void deleteDeweloper(Long deweloperId) {
@@ -36,15 +38,23 @@ public class DeweloperService {
     }
 
     @Transactional
-    public void updateDeweloper(Long deweloperId,
-                                String imie) {
-        com.example.mas.deweloper.Deweloper deweloper = deweloperRepository.findById(deweloperId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + deweloperId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, deweloper.getImie())) {
-            deweloper.setImie(imie);
-        }
+//    public void updateDeweloper(Long deweloperId,
+//                                String imie) {
+//        com.example.mas.deweloper.Deweloper deweloper = deweloperRepository.findById(deweloperId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + deweloperId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, deweloper.getImie())) {
+//            deweloper.setImie(imie);
+//        }
+//    }
+
+    public Optional<Deweloper> updateDeweloper(Deweloper deweloper) {
+        Optional<Deweloper> znajdzDeweloper = deweloperRepository.findById(deweloper.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzDeweloper;
     }
 }

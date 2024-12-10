@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TesterJednostkowyService {
@@ -21,9 +22,10 @@ public class TesterJednostkowyService {
         return testerJednostkowyRepository.findAll();
     }
 
-    public void addNewTesterJednostkowy(com.example.mas.testerJednostkowy.TesterJednostkowy testerJednostkowy) {
+    public TesterJednostkowy addNewTesterJednostkowy(TesterJednostkowy testerJednostkowy) {
         System.out.println(testerJednostkowy);
         testerJednostkowyRepository.save(testerJednostkowy);
+        return testerJednostkowy;
     }
 
     public void deleteTesterJednostkowy(Long testerJednostkowyId) {
@@ -36,15 +38,23 @@ public class TesterJednostkowyService {
     }
 
     @Transactional
-    public void updateTesterJednostkowy(Long testerJednostkowyId,
-                                        String imie) {
-        com.example.mas.testerJednostkowy.TesterJednostkowy testerJednostkowy = testerJednostkowyRepository.findById(testerJednostkowyId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + testerJednostkowyId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, testerJednostkowy.getImie())) {
-            testerJednostkowy.setImie(imie);
-        }
+//    public void updateTesterJednostkowy(Long testerJednostkowyId,
+//                                String imie) {
+//        com.example.mas.testerJednostkowy.TesterJednostkowy testerJednostkowy = testerJednostkowyRepository.findById(testerJednostkowyId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + testerJednostkowyId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, testerJednostkowy.getImie())) {
+//            testerJednostkowy.setImie(imie);
+//        }
+//    }
+
+    public Optional<TesterJednostkowy> updateTesterJednostkowy(TesterJednostkowy testerJednostkowy) {
+        Optional<TesterJednostkowy> znajdzTesterJednostkowy = testerJednostkowyRepository.findById(testerJednostkowy.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzTesterJednostkowy;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class GraService {
@@ -21,9 +22,10 @@ public class GraService {
         return graRepository.findAll();
     }
 
-    public void addNewGra(Gra gra) {
+    public Gra addNewGra(Gra gra) {
         System.out.println(gra);
         graRepository.save(gra);
+        return gra;
     }
 
     public void deleteGra(Long graId) {
@@ -36,15 +38,24 @@ public class GraService {
     }
 
     @Transactional
-    public void updateGra(Long graId,
-                          String nazwa) {
-        Gra gra = graRepository.findById(graId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Gra " + graId + " nie istnieje"));
-        if (nazwa != null &&
-                !nazwa.isEmpty() &&
-                !Objects.equals(nazwa, gra.getNazwa())) {
-            gra.setNazwa(nazwa);
-        }
+    public Optional<Gra> updateGra(Gra gra) {
+        Optional<Gra> znajdzGra = graRepository.findById(gra.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzGra;
     }
+
+
+//    public void updateGra(Long graId,
+//                          String nazwa) {
+//        Gra gra = graRepository.findById(graId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Gra " + graId + " nie istnieje"));
+//        if (nazwa != null &&
+//                !nazwa.isEmpty() &&
+//                !Objects.equals(nazwa, gra.getNazwa())) {
+//            gra.setNazwa(nazwa);
+//        }
+//    }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PrzedstawicielWydawcyService {
@@ -21,9 +22,10 @@ public class PrzedstawicielWydawcyService {
         return przedstawicielWydawcyRepository.findAll();
     }
 
-    public void addNewPrzedstawicielWydawcy(com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy przedstawicielWydawcy) {
+    public PrzedstawicielWydawcy addNewPrzedstawicielWydawcy(PrzedstawicielWydawcy przedstawicielWydawcy) {
         System.out.println(przedstawicielWydawcy);
         przedstawicielWydawcyRepository.save(przedstawicielWydawcy);
+        return przedstawicielWydawcy;
     }
 
     public void deletePrzedstawicielWydawcy(Long przedstawicielWydawcyId) {
@@ -36,15 +38,23 @@ public class PrzedstawicielWydawcyService {
     }
 
     @Transactional
-    public void updatePrzedstawicielWydawcy(Long przedstawicielWydawcyId,
-                                            String imie) {
-        com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy przedstawicielWydawcy = przedstawicielWydawcyRepository.findById(przedstawicielWydawcyId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + przedstawicielWydawcyId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, przedstawicielWydawcy.getImie())) {
-            przedstawicielWydawcy.setImie(imie);
-        }
+//    public void updatePrzedstawicielWydawcy(Long przedstawicielWydawcyId,
+//                                String imie) {
+//        com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy przedstawicielWydawcy = przedstawicielWydawcyRepository.findById(przedstawicielWydawcyId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + przedstawicielWydawcyId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, przedstawicielWydawcy.getImie())) {
+//            przedstawicielWydawcy.setImie(imie);
+//        }
+//    }
+
+    public Optional<PrzedstawicielWydawcy> updatePrzedstawicielWydawcy(PrzedstawicielWydawcy przedstawicielWydawcy) {
+        Optional<PrzedstawicielWydawcy> znajdzPrzedstawicielWydawcy = przedstawicielWydawcyRepository.findById(przedstawicielWydawcy.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzPrzedstawicielWydawcy;
     }
 }

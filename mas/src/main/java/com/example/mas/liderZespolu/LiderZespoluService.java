@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class LiderZespoluService {
@@ -21,9 +22,10 @@ public class LiderZespoluService {
         return liderZespoluRepository.findAll();
     }
 
-    public void addNewLiderZespolu(com.example.mas.liderZespolu.LiderZespolu liderZespolu) {
+    public LiderZespolu addNewLiderZespolu(LiderZespolu liderZespolu) {
         System.out.println(liderZespolu);
         liderZespoluRepository.save(liderZespolu);
+        return liderZespolu;
     }
 
     public void deleteLiderZespolu(Long liderZespoluId) {
@@ -36,15 +38,23 @@ public class LiderZespoluService {
     }
 
     @Transactional
-    public void updateLiderZespolu(Long liderZespoluId,
-                                   String imie) {
-        com.example.mas.liderZespolu.LiderZespolu liderZespolu = liderZespoluRepository.findById(liderZespoluId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Pracownik studia " + liderZespoluId + " nie istnieje"));
-        if (imie != null &&
-                !imie.isEmpty() &&
-                !Objects.equals(imie, liderZespolu.getImie())) {
-            liderZespolu.setImie(imie);
-        }
+//    public void updateLiderZespolu(Long liderZespoluId,
+//                                String imie) {
+//        com.example.mas.liderZespolu.LiderZespolu liderZespolu = liderZespoluRepository.findById(liderZespoluId)
+//                .orElseThrow(() -> new IllegalStateException(
+//                        "Pracownik studia " + liderZespoluId + " nie istnieje"));
+//        if (imie != null &&
+//                !imie.isEmpty() &&
+//                !Objects.equals(imie, liderZespolu.getImie())) {
+//            liderZespolu.setImie(imie);
+//        }
+//    }
+
+    public Optional<LiderZespolu> updateLiderZespolu(LiderZespolu liderZespolu) {
+        Optional<LiderZespolu> znajdzLiderZespolu = liderZespoluRepository.findById(liderZespolu.getId());
+//              .orElseThrow(() -> new IllegalStateException(
+//                       "Pracownik studia nie istnieje"));
+
+        return znajdzLiderZespolu;
     }
 }

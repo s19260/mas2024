@@ -86,6 +86,10 @@ public class Gra {
         this.studioPartnerskie = studioPartnerskie;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Gra{" +
