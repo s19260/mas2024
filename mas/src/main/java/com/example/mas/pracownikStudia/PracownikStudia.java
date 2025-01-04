@@ -1,10 +1,18 @@
 package com.example.mas.pracownikStudia;
 
+import com.example.mas.projektGry.ProjektGry;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
+@Table
+@AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class PracownikStudia {
 
     @Id
@@ -24,6 +32,10 @@ public abstract class PracownikStudia {
     private String adresZamieszkania;
     private boolean aktualnyStatusZatrudnienia;
     private int doswiadczenie;
+    @ManyToOne
+    @JoinColumn(name = "projektGry.id")
+    @JsonBackReference
+    private ProjektGry projektGry;
 
     public PracownikStudia() {
     }
@@ -56,74 +68,5 @@ public abstract class PracownikStudia {
         this.adresZamieszkania = adresZamieszkania;
         this.aktualnyStatusZatrudnienia = aktualnyStatusZatrudnienia;
         this.doswiadczenie = doswiadczenie;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getImie() {
-        return imie;
-    }
-
-    public void setImie(String imie) {
-        this.imie = imie;
-    }
-
-    public String getNazwisko() {
-        return nazwisko;
-    }
-
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
-    }
-
-    public LocalDate getDataZatrudnienia() {
-        return dataZatrudnienia;
-    }
-
-    public void setDataZatrudnienia(LocalDate dataZatrudnienia) {
-        this.dataZatrudnienia = dataZatrudnienia;
-    }
-
-    public String getAdresZamieszkania() {
-        return adresZamieszkania;
-    }
-
-    public void setAdresZamieszkania(String adresZamieszkania) {
-        this.adresZamieszkania = adresZamieszkania;
-    }
-
-    public boolean isAktualnyStatusZatrudnienia() {
-        return aktualnyStatusZatrudnienia;
-    }
-
-    public void setAktualnyStatusZatrudnienia(boolean aktualnyStatusZatrudnienia) {
-        this.aktualnyStatusZatrudnienia = aktualnyStatusZatrudnienia;
-    }
-
-    public int getDoswiadczenie() {
-        return doswiadczenie;
-    }
-
-    public void setDoswiadczenie(int doswiadczenie) {
-        this.doswiadczenie = doswiadczenie;
-    }
-
-    @Override
-    public String toString() {
-        return "PracownikStudia{" +
-                "id=" + id +
-                ", imie='" + imie + '\'' +
-                ", nazwisko='" + nazwisko + '\'' +
-                ", dataZatrudnienia=" + dataZatrudnienia +
-                ", adresZamieszkania='" + adresZamieszkania + '\'' +
-                ", aktualnyStatusZatrudnienia=" + aktualnyStatusZatrudnienia +
-                ", doswiadczenie=" + doswiadczenie +
-                '}';
     }
 }

@@ -1,16 +1,16 @@
 package com.example.mas.liderZespolu;
 
-import com.example.mas.pracownikStudia.PracownikStudia;
+import com.example.mas.deweloper.Deweloper;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.Table;
+
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-public class LiderZespolu extends PracownikStudia {
-    public LiderZespolu(String imie, String nazwisko, LocalDate dataZatrudnienia, String adresZamieszkania, boolean aktualnyStatusZatrudnienia, int doswiadczenie) {
-        super(imie, nazwisko, dataZatrudnienia, adresZamieszkania, aktualnyStatusZatrudnienia, doswiadczenie);
+public class LiderZespolu extends Deweloper {
+    public LiderZespolu(String imie, String nazwisko, LocalDate dataZatrudnienia, String adresZamieszkania, boolean aktualnyStatusZatrudnienia, int doswiadczenie, List<String> jezykiProgramowania) {
+        super(imie, nazwisko, dataZatrudnienia, adresZamieszkania, aktualnyStatusZatrudnienia, doswiadczenie, jezykiProgramowania);
     }
 
     public LiderZespolu() {

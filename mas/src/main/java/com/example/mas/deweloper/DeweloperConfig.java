@@ -23,7 +23,7 @@ public class DeweloperConfig {
                     "Dolna 52, Warszawa",
                     true,
                     12,
-                    "java"
+                    List.of("java", "c#")
             );
 
             Deweloper adam = new Deweloper(
@@ -33,7 +33,7 @@ public class DeweloperConfig {
                     "Jana Kazimierza 12, Warszawa",
                     true,
                     7,
-                    "c++"
+                    List.of("c++", "c")
             );
 
             repository.saveAll(
