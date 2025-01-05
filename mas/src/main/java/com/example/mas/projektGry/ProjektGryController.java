@@ -1,6 +1,7 @@
 package com.example.mas.projektGry;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,4 +39,12 @@ public class ProjektGryController {
             @RequestParam(required = false) String liderZespolu) {
         projektGryService.updateProjektGry(projektGryId, liderZespolu);
   }
+
+    @PutMapping("/{projektGryId}/assign-to/{przedstawicielWydawcyId}")
+    public ResponseEntity<ProjektGry> assignProjektGryToPrzedstawiciel(
+            @PathVariable Long projektGryId,
+            @PathVariable Long przedstawicielWydawcyId) {
+        ProjektGry updatedProjektGry = projektGryService.assignProjektGry(projektGryId, przedstawicielWydawcyId);
+        return ResponseEntity.ok(updatedProjektGry);
+    }
 }

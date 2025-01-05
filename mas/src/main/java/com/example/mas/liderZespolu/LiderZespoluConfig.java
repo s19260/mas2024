@@ -22,7 +22,8 @@ public class LiderZespoluConfig {
                     LocalDate.of(2024, Month.NOVEMBER, 5),
                     "Dolna 52, Warszawa",
                     true,
-                    12
+                    12,
+                    List.of("java", "test123")
             );
 
 

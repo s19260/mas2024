@@ -1,4 +1,6 @@
 package com.example.mas.przedstawicielWydawcy;
 
-public interface PrzedstawicielWydawcyRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PrzedstawicielWydawcyRepository extends JpaRepository<PrzedstawicielWydawcy, Long> {
 }
