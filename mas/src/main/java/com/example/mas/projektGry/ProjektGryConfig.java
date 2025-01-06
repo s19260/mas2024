@@ -22,7 +22,7 @@ public class ProjektGryConfig {
                     12L,
                     1,
                     2,
-                    "dupa"
+                    "Xbox"
             );
 
             PracownikStudia pracownikStudia = pracownikStudiaRepository.findPracownikStudiaById(2L).get();

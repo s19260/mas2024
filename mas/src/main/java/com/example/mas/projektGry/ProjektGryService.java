@@ -21,9 +21,14 @@ public class ProjektGryService {
         this.przedstawicielWydawcyRepository = przedstawicielWydawcyRepository;
     }
 
-    public List<ProjektGry> getProjektGry() {
+    public List<ProjektGry> getAllProjektGry() {
         return projektGryRepository.findAll();
     }
+
+    public ProjektGry getProjektGry(Long id) {
+        return projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
+    }
+
 
     public void addNewProjektGry(ProjektGry projektGry) {
         System.out.println(projektGry);

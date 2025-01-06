@@ -19,8 +19,14 @@ public class ProjektGryController {
     }
 
     @GetMapping
-    public List<ProjektGry> getProjektGry() {
-        return projektGryService.getProjektGry();
+    public List<ProjektGry> getAllProjektGry() {
+        return projektGryService.getAllProjektGry();
+    }
+    @GetMapping(path = "{projektGryId}")
+    public ProjektGry getProjektGry(
+            @PathVariable("projektGryId") Long projektGryId
+    ) {
+        return projektGryService.getProjektGry(projektGryId);
     }
 
     @PostMapping

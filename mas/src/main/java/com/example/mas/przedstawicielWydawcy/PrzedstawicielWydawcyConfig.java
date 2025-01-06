@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
+import java.util.List;
+
 @Configuration
 public class PrzedstawicielWydawcyConfig {
 
@@ -16,8 +18,13 @@ public class PrzedstawicielWydawcyConfig {
                     "Benek",
                     "Kowalski",
                     "Super wydawnictow"
+            );  PrzedstawicielWydawcy przedstawicielWydawcy2 = new PrzedstawicielWydawcy(
+                    "Benek",
+                    "Kowalski",
+                    "Super wydawnictow ujujhu"
             );
-            repository.save(przedstawicielWydawcy);
+            repository.saveAll(List.of(przedstawicielWydawcy, przedstawicielWydawcy2));
+
         };
     }
 }
