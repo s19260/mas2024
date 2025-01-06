@@ -3,10 +3,12 @@ package com.example.mas.projektGry;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -14,15 +16,17 @@ public class ProjektGryService {
 
     private final ProjektGryRepository projektGryRepository;
     private final PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository;
+    private final ProjektGryMapper projektGryMapper;
 
     @Autowired
-    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository) {
+    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper) {
         this.projektGryRepository = projektGryRepository;
         this.przedstawicielWydawcyRepository = przedstawicielWydawcyRepository;
+        this.projektGryMapper = projektGryMapper;
     }
 
-    public List<ProjektGry> getAllProjektGry() {
-        return projektGryRepository.findAll();
+    public List<ProjektGryDTO> getAllProjektGry() {
+        return projektGryRepository.findAll().stream().map(projektGryMapper::toDto).collect(Collectors.toList());
     }
 
     public ProjektGry getProjektGry(Long id) {
@@ -84,4 +88,5 @@ public class ProjektGryService {
 
         return projektGry;
     }
+
 }

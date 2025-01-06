@@ -19,8 +19,8 @@ public class ProjektGryController {
     }
 
     @GetMapping
-    public List<ProjektGry> getAllProjektGry() {
-        return projektGryService.getAllProjektGry();
+    public ResponseEntity<List<ProjektGryDTO>> getAllProjektGry() {
+        return ResponseEntity.ok(projektGryService.getAllProjektGry());
     }
     @GetMapping(path = "{projektGryId}")
     public ProjektGry getProjektGry(
@@ -50,7 +50,7 @@ public class ProjektGryController {
     public ResponseEntity<ProjektGry> assignProjektGryToPrzedstawiciel(
             @PathVariable Long projektGryId,
             @PathVariable Long przedstawicielWydawcyId) {
-        ProjektGry updatedProjektGry = projektGryService.assignProjektGry(projektGryId, przedstawicielWydawcyId);
+        ProjektGry updatedProjektGry = projektGryService.assignProjektGry(przedstawicielWydawcyId, projektGryId);
         return ResponseEntity.ok(updatedProjektGry);
     }
 }

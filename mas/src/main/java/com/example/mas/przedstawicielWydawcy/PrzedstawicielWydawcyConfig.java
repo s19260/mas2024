@@ -11,7 +11,7 @@ import java.util.List;
 public class PrzedstawicielWydawcyConfig {
 
     @Bean
-    @Order(4)
+    @Order(3)
     CommandLineRunner commandLineRunnerPrzedstawicielWydawcy(com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository repository) {
         return args -> {
             PrzedstawicielWydawcy przedstawicielWydawcy = new PrzedstawicielWydawcy(
@@ -19,9 +19,9 @@ public class PrzedstawicielWydawcyConfig {
                     "Kowalski",
                     "Super wydawnictow"
             );  PrzedstawicielWydawcy przedstawicielWydawcy2 = new PrzedstawicielWydawcy(
-                    "Benek",
+                    "Jasio",
                     "Kowalski",
-                    "Super wydawnictow ujujhu"
+                    "RITO GAMES"
             );
             repository.saveAll(List.of(przedstawicielWydawcy, przedstawicielWydawcy2));
 

@@ -1,12 +1,20 @@
 package com.example.mas.gra;
 
+import com.example.mas.projektGry.ProjektGry;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Gra {
 
     @Id
@@ -25,18 +33,8 @@ public class Gra {
     private LocalDate dataWydania;
     private String opisGry;
     private String studioPartnerskie;
-
-    public Gra() {
-    }
-
-    public Gra(Long id, String nazwa, String platformaDocelowa, LocalDate dataWydania, String opisGry, String studioPartnerskie) {
-        this.id = id;
-        this.nazwa = nazwa;
-        this.platformaDocelowa = platformaDocelowa;
-        this.dataWydania = dataWydania;
-        this.opisGry = opisGry;
-        this.studioPartnerskie = studioPartnerskie;
-    }
+    @OneToOne(mappedBy = "gra")
+    private ProjektGry projektGry;
 
     public Gra(String nazwa, String platformaDocelowa, LocalDate dataWydania, String opisGry, String studioPartnerskie) {
         this.nazwa = nazwa;
@@ -44,56 +42,5 @@ public class Gra {
         this.dataWydania = dataWydania;
         this.opisGry = opisGry;
         this.studioPartnerskie = studioPartnerskie;
-    }
-
-    public String getNazwa() {
-        return nazwa;
-    }
-
-    public void setNazwa(String nazwa) {
-        this.nazwa = nazwa;
-    }
-
-    public String getPlatformaDocelowa() {
-        return platformaDocelowa;
-    }
-
-    public void setPlatformaDocelowa(String platformaDocelowa) {
-        this.platformaDocelowa = platformaDocelowa;
-    }
-
-    public LocalDate getDataWydania() {
-        return dataWydania;
-    }
-
-    public void setDataWydania(LocalDate dataWydania) {
-        this.dataWydania = dataWydania;
-    }
-
-    public String getOpisGry() {
-        return opisGry;
-    }
-
-    public void setOpisGry(String opisGry) {
-        this.opisGry = opisGry;
-    }
-
-    public String getStudioPartnerskie() {
-        return studioPartnerskie;
-    }
-
-    public void setStudioPartnerskie(String studioPartnerskie) {
-        this.studioPartnerskie = studioPartnerskie;
-    }
-
-    @Override
-    public String toString() {
-        return "Gra{" +
-                "nazwa='" + nazwa + '\'' +
-                ", platformaDocelowa='" + platformaDocelowa + '\'' +
-                ", dataWydania=" + dataWydania +
-                ", opisGry='" + opisGry + '\'' +
-                ", studioPartnerskie='" + studioPartnerskie + '\'' +
-                '}';
     }
 }

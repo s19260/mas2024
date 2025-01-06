@@ -3,17 +3,18 @@ package com.example.mas.pracownikStudia;
 import com.example.mas.projektGry.ProjektGry;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
 @Table
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class PracownikStudia {
+public class PracownikStudia {
 
     @Id
     @SequenceGenerator(
@@ -36,9 +37,6 @@ public abstract class PracownikStudia {
     @JoinColumn(name = "projektGry.id")
     @JsonBackReference
     private ProjektGry projektGry;
-
-    public PracownikStudia() {
-    }
 
     public PracownikStudia(Long id,
                            String imie,

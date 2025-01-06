@@ -1,11 +1,10 @@
 package com.example.mas.projektGry;
 
+import com.example.mas.gra.Gra;
 import com.example.mas.liderZespolu.LiderZespolu;
 import com.example.mas.pracownikStudia.PracownikStudia;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy;
@@ -18,6 +17,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @Table
+@AllArgsConstructor
 public class ProjektGry {
 
     @Id
@@ -49,6 +49,9 @@ public class ProjektGry {
     @JoinColumn(name = "przedstawicielWydawcy.id")
     @JsonBackReference
     private PrzedstawicielWydawcy przedstawicielWydawcy;
+    @OneToOne
+    @JoinColumn(name = "gra.id")
+    private Gra gra;
 
     public ProjektGry(LiderZespolu liderZespolu, Long budzet, double kosztMarketingu, double kosztUtrzymaniaZespolu, String wymaganySprzet) {
         this.liderZespolu = liderZespolu;
@@ -58,9 +61,9 @@ public class ProjektGry {
         this.wymaganySprzet = wymaganySprzet;
     }
 
-    public ProjektGry(LiderZespolu liderZespolu) {
-        this.liderZespolu = liderZespolu;
-    }
+//    public ProjektGry(LiderZespolu liderZespolu) {
+//        this.liderZespolu = liderZespolu;
+//    }
 
     public void addPracownikStudia(PracownikStudia pracownikStudia){
        przypisaniPracownicy.add(pracownikStudia);
