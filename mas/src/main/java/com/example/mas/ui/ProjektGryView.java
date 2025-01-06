@@ -1,8 +1,8 @@
 package com.example.mas.ui;
 
 import com.example.mas.pracownikStudia.PracownikStudia;
-import com.example.mas.projektGry.ProjektGry;
 import com.example.mas.projektGry.ProjektGryDTO;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.CellFocusEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,18 +15,19 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 
-@Route("projektgryview")
+@Route("projekt-gry-view")
 public class ProjektGryView extends VerticalLayout {
     private final RestTemplate restTemplate;
 
     public ProjektGryView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
 
-        ResponseEntity<ProjektGryDTO[]> responseEntity = restTemplate.getForEntity("http://localhost:8080/api/v1/projektgry", ProjektGryDTO[].class);
+        ResponseEntity<ProjektGryDTO[]> responseEntity = restTemplate.getForEntity(
+                "http://localhost:8080/api/v1/projektgry", ProjektGryDTO[].class);
         List<ProjektGryDTO> projektGryList = Arrays.asList(responseEntity.getBody());
         Grid<ProjektGryDTO> grid = new Grid<>(ProjektGryDTO.class, false);
-
         grid.setItems(projektGryList);
+
         grid.addColumn(ProjektGryDTO::getId).setHeader("ID Projektu").setSortable(true);
         grid.addColumn(pg -> pg.getLiderZespolu().getImie()).setHeader("Imie lidera").setSortable(true);
         grid.addColumn(ProjektGryDTO::getId).setHeader("ID Projektu").setSortable(true);
@@ -54,34 +55,42 @@ public class ProjektGryView extends VerticalLayout {
 //                    return pracownikGrid;
 //                })
         ).setHeader("Przypisani pracownicy");
+
+        grid.addColumn(new ComponentRenderer<>(projektGry -> {
+            Button editButton = new Button("Edytuj");
+            editButton.addClickListener(event -> {
+                getUI().ifPresent(ui -> ui.navigate("edit-projekt-gry/" + projektGry.getId()));
+            });
+            return editButton;
+        })).setHeader("Akcja");
+
         TextArea readonlyArea = new TextArea();
         readonlyArea.setReadOnly(true);
         readonlyArea.setWidth("100%");
+
+        //to tylko przykladowe
         grid.addCellFocusListener(event -> {
             CellFocusEvent.GridSection section = event.getSection();
             String column = event.getColumn().map(Grid.Column::getHeaderText)
-                    .orElse("Not available");
+                    .orElse("Aktualnie niedostępne");
             String row = event.getItem()
                     .map(value -> String.valueOf(projektGryList.indexOf(value)))
-                    .orElse("Not available");
+                    .orElse("Aktualnie niedostępne");
             String fullName = event.getItem().map(projektGry -> {
-                        if (projektGry.getGra() != null)
-                            return projektGry.getGra().getNazwa();
-                        else
-                            return "";
-                    }).orElse("Not available");
+                if (projektGry.getGra() != null)
+                    return projektGry.getGra().getNazwa();
+                else
+                    return "";
+            }).orElse("Aktualnie niedostępne");
 
             String eventSummary = String.format(
-                    "Section: %s%nRzad: %s%nKolumna: %s%nGra: %s", section,
+                    "Sekcja: %s%nRząd: %s%nKolumna: %s%nGra: %s", section,
                     row, column, fullName);
             readonlyArea.setValue(eventSummary);
         });
+
         grid.setAllRowsVisible(true);
-        add(grid);
-        add(readonlyArea);
 
-
-
+        add(grid, readonlyArea);
     }
 }
-

@@ -23,7 +23,7 @@ public class ProjektGryController {
         return ResponseEntity.ok(projektGryService.getAllProjektGry());
     }
     @GetMapping(path = "{projektGryId}")
-    public ProjektGry getProjektGry(
+    public ProjektGryDTO getProjektGry(
             @PathVariable("projektGryId") Long projektGryId
     ) {
         return projektGryService.getProjektGry(projektGryId);
@@ -42,8 +42,12 @@ public class ProjektGryController {
     @PutMapping(path = "{projektGryId}")
     public void updateProjektGry(
             @PathVariable("projektGryId") Long projektGryId,
-            @RequestParam(required = false) String liderZespolu) {
-        projektGryService.updateProjektGry(projektGryId, liderZespolu);
+            @RequestParam("sprzet") String sprzet,
+            @RequestParam("budzet") Long budzet,
+            @RequestParam("kosztMarketingu") double kosztMarketingu,
+            @RequestParam("kosztUtrzymania") double kosztUtrzymania
+            ) {
+        projektGryService.updateProjektGry(projektGryId, sprzet, budzet, kosztMarketingu, kosztUtrzymania);
   }
 
     @PutMapping("/{projektGryId}/assign-to/{przedstawicielWydawcyId}")

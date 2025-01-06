@@ -29,8 +29,9 @@ public class ProjektGryService {
         return projektGryRepository.findAll().stream().map(projektGryMapper::toDto).collect(Collectors.toList());
     }
 
-    public ProjektGry getProjektGry(Long id) {
-        return projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
+    public ProjektGryDTO getProjektGry(Long id) {
+        ProjektGry projektGry = projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
+        return projektGryMapper.toDto(projektGry);
     }
 
 
@@ -46,19 +47,6 @@ public class ProjektGryService {
                     "ProjektGry " + projektGryId + " nie istnieje");
         }
         projektGryRepository.deleteById(projektGryId);
-    }
-
-    @Transactional
-    public void updateProjektGry(Long projektGryId,
-                                 String liderZespolu) {
-        ProjektGry projektGry = projektGryRepository.findById(projektGryId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "ProjektGry " + projektGryId + " nie istnieje"));
-//        if (liderZespolu != null &&
-//                !liderZespolu.isEmpty() &&
-//                !Objects.equals(liderZespolu, projektGry.liderZespolu())) {
-//            projektGry.setLiderZespolu(liderZespolu);
-//        }
     }
 
     public ProjektGry createAndAssignProjektGry(Long przedstawicielWydawcyId, ProjektGry projektGry) {
@@ -89,4 +77,13 @@ public class ProjektGryService {
         return projektGry;
     }
 
+    public void updateProjektGry(Long projektGryId, String sprzet, Long budzet, double kosztMarketingu, double kosztUtrzymania) {
+        ProjektGry projektGry = projektGryRepository.findProjektGryById(projektGryId).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
+
+        projektGry.setBudzet(budzet);
+        projektGry.setKosztUtrzymaniaZespolu(kosztUtrzymania);
+        projektGry.setKosztMarketingu(kosztMarketingu);
+        projektGry.setWymaganySprzet(sprzet);
+        projektGryRepository.save(projektGry);
+    }
 }
