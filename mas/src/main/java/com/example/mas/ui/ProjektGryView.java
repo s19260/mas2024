@@ -41,6 +41,7 @@ public class ProjektGryView extends VerticalLayout {
             else
                 return "";
         }).setHeader("Przedstawiciel wydawcy");
+
         grid.addColumn(
                 projektGry -> {
                     if (projektGry.getPrzypisaniPracownicy() != null)

@@ -1,6 +1,7 @@
 package com.example.mas.deweloper;
 
 import com.example.mas.pracownikStudia.PracownikStudia;
+import com.example.mas.projektGry.ProjektGry;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +16,14 @@ public class Deweloper extends PracownikStudia {
 
     private List<String> jezykiProgramowania;
 
+
     public Deweloper(String imie, String nazwisko, LocalDate dataZatrudnienia, String adresZamieszkania, boolean aktualnyStatusZatrudnienia, int doswiadczenie, List<String> jezykiProgramowania) {
         super(imie, nazwisko, dataZatrudnienia, adresZamieszkania, aktualnyStatusZatrudnienia, doswiadczenie);
+        this.jezykiProgramowania = jezykiProgramowania;
+    }
+
+    public Deweloper(Long id, String imie, String nazwisko, LocalDate dataZatrudnienia, String adresZamieszkania, boolean aktualnyStatusZatrudnienia, int doswiadczenie, List<String> jezykiProgramowania, ProjektGry projektGry) {
+        super(id, imie, nazwisko, dataZatrudnienia, adresZamieszkania, aktualnyStatusZatrudnienia, doswiadczenie, projektGry);
         this.jezykiProgramowania = jezykiProgramowania;
     }
 

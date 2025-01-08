@@ -1,5 +1,6 @@
 package com.example.mas.pracownikStudia;
 
+import com.example.mas.projektGry.ProjektGryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,13 @@ public class PracownikStudiaController {
     @GetMapping
     public List<PracownikStudia> getPracownikStudia() {
         return pracownikStudiaService.getPracownikStudia();
+    }
+
+    @GetMapping(path = "{pracownikStudiaId}")
+    public PracownikStudiaDTO getPracownikStudia(
+            @PathVariable("pracownikStudiaId") Long pracownikStudiaId
+    ) {
+        return pracownikStudiaService.getPracownikStudia(pracownikStudiaId);
     }
 
     @PostMapping

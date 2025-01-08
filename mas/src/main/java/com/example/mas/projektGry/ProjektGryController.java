@@ -22,6 +22,7 @@ public class ProjektGryController {
     public ResponseEntity<List<ProjektGryDTO>> getAllProjektGry() {
         return ResponseEntity.ok(projektGryService.getAllProjektGry());
     }
+
     @GetMapping(path = "{projektGryId}")
     public ProjektGryDTO getProjektGry(
             @PathVariable("projektGryId") Long projektGryId

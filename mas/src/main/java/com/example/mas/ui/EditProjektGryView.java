@@ -34,7 +34,7 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
         kosztUtrzymaniaZespoluField.setMin(0);
 
         saveButton.addClickListener(e -> saveProjektGry());
-        cancelButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("projektgryview")));
+        cancelButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("projekt-gry-view")));
 
         HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton, saveButton);
         add(idField,budzetField, kosztMarketinguField, kosztUtrzymaniaZespoluField, wymaganySprzetField, buttonLayout);
@@ -75,7 +75,7 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
                     + "&kosztMarketingu=" + kosztMarketinguField.getValue()
                     + "&kosztUtrzymania=" + kosztUtrzymaniaZespoluField.getValue(), null);
             Notification.show("Projekt gry zedytowany pomyślnie!", 3000, Notification.Position.MIDDLE);
-            getUI().ifPresent(ui -> ui.navigate("projektgryview"));
+            getUI().ifPresent(ui -> ui.navigate("projekt-gry-view"));
         } catch (Exception ex) {
             Notification.show("Wystąpił błąd podczas zapisu: " + ex.getMessage(), 3000, Notification.Position.MIDDLE);
         }
