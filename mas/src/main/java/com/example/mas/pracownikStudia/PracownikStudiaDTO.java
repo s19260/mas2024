@@ -14,7 +14,6 @@ public class PracownikStudiaDTO {
     private String imie;
     private String nazwisko;
     private boolean aktualnyStatusZatrudnienia;
-    private ProjektGry projektGry;
-    private Set<ProjektGry> przypisaneProjektyGry;
+    private ProjektGryDetailsDTO projektGry;
 
 }

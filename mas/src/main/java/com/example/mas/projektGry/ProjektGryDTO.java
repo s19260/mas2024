@@ -23,5 +23,4 @@ public class ProjektGryDTO {
     private String wymaganySprzet;
     private PrzedstawicielWydawcyDTO przedstawicielWydawcy;
     private GraDTO gra;
-
 }

@@ -52,7 +52,8 @@ public class PracownikStudiaService {
 
     @Transactional
     public void updatePracownikStudia(Long pracownikStudiaId,
-                                      String imie) {
+                                      String imie,
+                                      String nazwisko) {
         PracownikStudia pracownikStudia = pracownikStudiaRepository.findById(pracownikStudiaId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Pracownik studia " + pracownikStudiaId + " nie istnieje"));
@@ -61,5 +62,8 @@ public class PracownikStudiaService {
                 !Objects.equals(imie, pracownikStudia.getImie())) {
             pracownikStudia.setImie(imie);
         }
+
+        pracownikStudia.setNazwisko(nazwisko);
+        pracownikStudiaRepository.save(pracownikStudia);
     }
 }

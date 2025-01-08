@@ -1,11 +1,7 @@
 package com.example.mas.ui;
 
-import com.example.mas.pracownikStudia.PracownikStudia;
 import com.example.mas.pracownikStudia.PracownikStudiaDTO;
-import com.example.mas.projektGry.ProjektGry;
-import com.example.mas.projektGry.ProjektGryDTO;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.CellFocusEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -35,8 +31,7 @@ public class PracownikStudiaView extends VerticalLayout {
         grid.addColumn(PracownikStudiaDTO::getNazwisko).setHeader("Nazwisko Pracownika").setSortable(true);
 
         grid.addColumn(pracownikStudia -> {
-            if (pracownikStudia.getPrzypisaneProjektyGry() != null)
-               // return pracownikStudia.getPrzypisaneProjektyGry().stream().map(ProjektGry::getId).toList();
+            if (pracownikStudia.getProjektGry() != null)
                 return pracownikStudia.getProjektGry().getId();
             else return "";
                 }

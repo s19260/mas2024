@@ -19,8 +19,8 @@ public class PracownikStudiaController {
     }
 
     @GetMapping
-    public List<PracownikStudia> getPracownikStudia() {
-        return pracownikStudiaService.getPracownikStudia();
+    public List<PracownikStudiaDTO> getPracownikStudia() {
+        return pracownikStudiaService.getAllPracownikStudia();
     }
 
     @GetMapping(path = "{pracownikStudiaId}")
@@ -43,7 +43,8 @@ public class PracownikStudiaController {
     @PutMapping(path = "{pracownikStudiaId}")
     public void updatePracownikStudia(
             @PathVariable("pracownikStudiaId") Long pracownikStudiaId,
-            @RequestParam(required = false) String imie) {
-                pracownikStudiaService.updatePracownikStudia(pracownikStudiaId, imie);
+            @RequestParam("imie") String imie,
+            @RequestParam("nazwisko") String nazwisko) {
+                pracownikStudiaService.updatePracownikStudia(pracownikStudiaId, imie, nazwisko);
     }
 }

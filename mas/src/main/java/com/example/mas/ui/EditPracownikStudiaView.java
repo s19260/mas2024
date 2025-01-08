@@ -75,7 +75,7 @@ public class EditPracownikStudiaView extends VerticalLayout implements BeforeEnt
 
         if (pracownikID != null) {
             try{
-                Long id = Long.valueOf(pracownikID);
+                Long id = Long.parseLong(pracownikID);
                 loadPracownikStudia(id);
             } catch (NumberFormatException ex) {
                 Notification.show("Nieprawidlowe id pracownika :(", 3000, Notification.Position.MIDDLE);

@@ -12,5 +12,4 @@ public interface PracownikStudiaRepository
 
     @Query("SELECT s FROM PracownikStudia s WHERE s.id = ?1")
     Optional<PracownikStudia> findPracownikStudiaById(Long id);
-
 }
