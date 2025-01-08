@@ -61,7 +61,7 @@ public class ProjektGryService {
         return projektGry;
     }
 
-    public ProjektGry assignProjektGry(Long przedstawicielWydawcyId, Long projektGryId){
+    public ProjektGryDTO assignProjektGry(Long przedstawicielWydawcyId, Long projektGryId){
         PrzedstawicielWydawcy przedstawicielWydawcy = przedstawicielWydawcyRepository.findById(przedstawicielWydawcyId)
                 .orElseThrow(() -> new IllegalArgumentException("Przedstawiciel Wydawcy z id " + przedstawicielWydawcyId + " nie istnieje"));
 
@@ -73,8 +73,7 @@ public class ProjektGryService {
 
         projektGryRepository.save(projektGry);
         przedstawicielWydawcyRepository.save(przedstawicielWydawcy);
-
-        return projektGry;
+        return projektGryMapper.toDto(projektGry);
     }
 
     public void updateProjektGry(Long projektGryId, String sprzet, Long budzet, double kosztMarketingu, double kosztUtrzymania) {

@@ -52,10 +52,10 @@ public class ProjektGryController {
   }
 
     @PutMapping("/{projektGryId}/assign-to/{przedstawicielWydawcyId}")
-    public ResponseEntity<ProjektGry> assignProjektGryToPrzedstawiciel(
+    public ResponseEntity<ProjektGryDTO> assignProjektGryToPrzedstawiciel(
             @PathVariable Long projektGryId,
             @PathVariable Long przedstawicielWydawcyId) {
-        ProjektGry updatedProjektGry = projektGryService.assignProjektGry(przedstawicielWydawcyId, projektGryId);
+        ProjektGryDTO updatedProjektGry = projektGryService.assignProjektGry(przedstawicielWydawcyId, projektGryId);
         return ResponseEntity.ok(updatedProjektGry);
     }
 }
