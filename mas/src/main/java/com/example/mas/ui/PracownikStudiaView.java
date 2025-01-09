@@ -1,8 +1,17 @@
 package com.example.mas.ui;
 
+import com.example.mas.pracownikStudia.PracownikStudia;
 import com.example.mas.pracownikStudia.PracownikStudiaDTO;
+import com.example.mas.pracownikStudia.PracownikStudiaService;
+import com.example.mas.pracownikStudia.ProjektGryDetailsDTO;
+import com.example.mas.projektGry.ProjektGry;
+import com.example.mas.projektGry.ProjektGryDTO;
+import com.example.mas.projektGry.ProjektGryRepository;
+import com.example.mas.projektGry.ProjektGryService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
@@ -45,7 +54,25 @@ public class PracownikStudiaView extends VerticalLayout {
                 getUI().ifPresent(ui -> ui.navigate("edit-pracownik-studia/" + pracownikStudia.getId()));
             });
             return editButton;
-        })).setHeader("Akcja");
+        })).setHeader("Edycja");
+
+        grid.addColumn(new ComponentRenderer<>(pracownikStudia -> {
+            Button deleteButton = new Button("Usun");
+
+            deleteButton.addClickListener(event -> {
+
+                String url = "http://localhost:8080/api/v1/pracownikstudia/" + pracownikStudia.getId();
+                restTemplate.delete(url);
+
+
+
+                Notification.show("Pracownik usuniety pomyslnie", 3000, Notification.Position.MIDDLE);
+                getUI().ifPresent(ui -> UI.getCurrent().getPage().reload());
+            });
+
+            return deleteButton;
+
+        })).setHeader("Usuniecie");
 
         TextArea readonlyArea = new TextArea();
         readonlyArea.setReadOnly(true);
@@ -54,6 +81,5 @@ public class PracownikStudiaView extends VerticalLayout {
         grid.setAllRowsVisible(true);
 
         add(grid, readonlyArea);
-
     }
 }

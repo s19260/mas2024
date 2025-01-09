@@ -85,4 +85,8 @@ public class ProjektGryService {
         projektGry.setWymaganySprzet(sprzet);
         projektGryRepository.save(projektGry);
     }
+
+    public List<ProjektGry> findByLiderZespolu_Id(Long id){
+        return projektGryRepository.findAllByLiderZespoluId(id);
+    }
 }

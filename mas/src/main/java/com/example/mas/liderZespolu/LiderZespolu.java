@@ -18,6 +18,8 @@ public class LiderZespolu extends Deweloper {
     }
 
 
+
+
     @Override
     public String toString() {
         return "LiderZespolu{}";

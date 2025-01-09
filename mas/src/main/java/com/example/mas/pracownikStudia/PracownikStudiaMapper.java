@@ -15,4 +15,8 @@ public class PracownikStudiaMapper {
         return modelMapper.map(entity, PracownikStudiaDTO.class);
     }
 
+    public PracownikStudia toEntity(PracownikStudiaDoZapisuDTO dto){
+        return modelMapper.map(dto, PracownikStudia.class);
+    }
+
 }

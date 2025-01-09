@@ -9,12 +9,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PracownikStudiaDTO {
-    private Long id;
-    private String imie;
-    private String nazwisko;
-    private boolean aktualnyStatusZatrudnienia;
-    private ProjektGryDetailsDTO projektGry;
-
+public class PracownikStudiaDoZapisuDTO {
+        private Long id;
+        private String imie;
+        private String nazwisko;
+        private boolean aktualnyStatusZatrudnienia;
 }
 

@@ -2,6 +2,8 @@ package com.example.mas.pracownikStudia;
 
 import com.example.mas.projektGry.ProjektGry;
 import com.example.mas.projektGry.ProjektGryDTO;
+import com.example.mas.projektGry.ProjektGryRepository;
+import com.example.mas.projektGry.ProjektGryService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,15 @@ public class PracownikStudiaService {
 
     private final PracownikStudiaRepository pracownikStudiaRepository;
     private final PracownikStudiaMapper pracownikStudiaMapper;
+    private final ProjektGryRepository projektGryRepository;
+    private final ProjektGryService projektGryService;
 
     @Autowired
-    public PracownikStudiaService(PracownikStudiaRepository pracownikStudiaRepository, PracownikStudiaMapper pracownikStudiaMapper) {
+    public PracownikStudiaService(PracownikStudiaRepository pracownikStudiaRepository, PracownikStudiaMapper pracownikStudiaMapper, ProjektGryRepository projektGryRepository, ProjektGryService projektGryService) {
         this.pracownikStudiaRepository = pracownikStudiaRepository;
         this.pracownikStudiaMapper = pracownikStudiaMapper;
+        this.projektGryRepository = projektGryRepository;
+        this.projektGryService = projektGryService;
     }
 
     public List<PracownikStudiaDTO> getAllPracownikStudia() {
@@ -41,13 +47,40 @@ public class PracownikStudiaService {
         pracownikStudiaRepository.save(pracownikStudia);
     }
 
+    public void addNewPracownikStudia(PracownikStudiaDoZapisuDTO pracownikStudia) {
+        System.out.println(pracownikStudia);
+        PracownikStudia ps = pracownikStudiaMapper.toEntity(pracownikStudia);
+        pracownikStudiaRepository.save(ps);
+    }
+
     public void deletePracownikStudia(Long pracownikStudiaId) {
         boolean exists = pracownikStudiaRepository.existsById(pracownikStudiaId);
         if(!exists){
             throw new IllegalStateException(
                     "Pracownik studia " + pracownikStudiaId + " nie istnieje");
         }
+        PracownikStudia pracownikStudia = pracownikStudiaRepository.findPracownikStudiaById(pracownikStudiaId).orElseThrow(() -> new RuntimeException("Pracownik studia nie znaleziony"));
+        if(pracownikStudia.getProjektGry() != null){
+           if(pracownikStudia.getProjektGry().getLiderZespolu() != null){
+
+
+            if(pracownikStudia.getProjektGry().getLiderZespolu().getId() == pracownikStudiaId)
+            {
+                List<ProjektGry> projekty = projektGryService.findByLiderZespolu_Id(pracownikStudiaId);
+                System.out.println("dupa " + projekty);
+                projekty.stream().forEach(projektGry -> {
+                    projektGry.setLiderZespolu(null);
+                });
+            }
+           }
+        ProjektGry projektGry = pracownikStudia.getProjektGry();
+        projektGry.removePracownikStudia(pracownikStudia);
+        projektGryRepository.save(projektGry);
         pracownikStudiaRepository.deleteById(pracownikStudiaId);
+        }
+        else
+            pracownikStudiaRepository.deleteById(pracownikStudiaId);
+
     }
 
     @Transactional

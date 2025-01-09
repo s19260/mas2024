@@ -7,6 +7,7 @@ import com.example.mas.pracownikStudia.PracownikStudia;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.example.mas.pracownikStudia.PracownikStudiaDTO;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -73,6 +74,10 @@ public class ProjektGry {
     public void removePracownikStudia(PracownikStudia pracownikStudia){
         przypisaniPracownicy.remove(pracownikStudia);
         pracownikStudia.setProjektGry(null);
+    }
+
+    public void removeLiderZespolu(LiderZespolu id){
+        liderZespolu = null;
     }
 
 }
