@@ -36,9 +36,8 @@ public class PracownikStudiaController {
     }
 
     @PostMapping(path = "/add-pracownik-studia")
-    public String registerNewPracownikStudia (@RequestBody PracownikStudiaDoZapisuDTO pracownikStudia) {
-        pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
-        return "Super zapisany!!!";
+    public PracownikStudiaDTO registerNewPracownikStudia (@RequestBody PracownikStudiaDoZapisuDTO pracownikStudia) {
+        return pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
     }
 
 

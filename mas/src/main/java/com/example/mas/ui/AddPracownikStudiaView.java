@@ -14,7 +14,7 @@ import com.vaadin.flow.router.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
-@Route("add-pracownik-studia")
+@Route("dodaj-pracownika-studia")
 public class AddPracownikStudiaView extends VerticalLayout {
     private final RestTemplate restTemplate;
 
@@ -38,7 +38,10 @@ public class AddPracownikStudiaView extends VerticalLayout {
     public AddPracownikStudiaView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
 
-        addButton.addClickListener(e ->  registerNewPracownikStudia());
+        addButton.addClickListener(e ->  {
+            PracownikStudiaDTO a = registerNewPracownikStudia();
+            Notification.show("Pracownik " + a.getImie() + " " + a.getNazwisko() +" dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
+        });
 
         HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton, addButton);
         add(imieField, nazwiskoField, buttonLayout);
@@ -46,14 +49,12 @@ public class AddPracownikStudiaView extends VerticalLayout {
         setSizeFull();
     }
 
-    //public void addPracownikStudia(){
-    public String registerNewPracownikStudia () {
-        String url = "http://localhost:8080/add-pracownik-studia";
+    public PracownikStudiaDTO registerNewPracownikStudia () {
+        String url = "http://localhost:8080/api/v1/pracownikstudia/add-pracownik-studia";
 
         PracownikStudiaDoZapisuDTO dto = new PracownikStudiaDoZapisuDTO(imieField.getValue(), nazwiskoField.getValue(), true);
-        Notification.show("Pracownik dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
 
-        return restTemplate.postForObject(url, dto, String.class);
+        return restTemplate.postForObject(url, dto, PracownikStudiaDTO.class);
 
     }
 

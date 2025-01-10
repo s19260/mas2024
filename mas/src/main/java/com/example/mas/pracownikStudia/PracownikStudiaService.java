@@ -47,11 +47,10 @@ public class PracownikStudiaService {
         pracownikStudiaRepository.save(pracownikStudia);
     }
 
-    public void addNewPracownikStudia(PracownikStudiaDoZapisuDTO pracownikStudia) {
-        System.out.println(pracownikStudia);
+    public PracownikStudiaDTO addNewPracownikStudia(PracownikStudiaDoZapisuDTO pracownikStudia) {
         PracownikStudia ps = pracownikStudiaMapper.toEntity(pracownikStudia);
         pracownikStudiaRepository.save(ps);
-        System.out.println("dupa" + ps);
+        return pracownikStudiaMapper.toDto(ps);
     }
 
     public void deletePracownikStudia(Long pracownikStudiaId) {

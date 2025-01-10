@@ -6,7 +6,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import org.springframework.web.client.RestTemplate;
 
-@Route("/")
+@Route("/home")
 public class HomePageView extends VerticalLayout {
     private final RestTemplate restTemplate;
 
