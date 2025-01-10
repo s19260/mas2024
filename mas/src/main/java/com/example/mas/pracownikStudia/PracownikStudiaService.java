@@ -51,6 +51,7 @@ public class PracownikStudiaService {
         System.out.println(pracownikStudia);
         PracownikStudia ps = pracownikStudiaMapper.toEntity(pracownikStudia);
         pracownikStudiaRepository.save(ps);
+        System.out.println("dupa" + ps);
     }
 
     public void deletePracownikStudia(Long pracownikStudiaId) {

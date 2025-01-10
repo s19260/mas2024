@@ -35,9 +35,10 @@ public class PracownikStudiaController {
         pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
     }
 
-    @PostMapping
-    public void registerNewPracownikStudia (@RequestBody PracownikStudiaDoZapisuDTO pracownikStudia) {
+    @PostMapping(path = "/add-pracownik-studia")
+    public String registerNewPracownikStudia (@RequestBody PracownikStudiaDoZapisuDTO pracownikStudia) {
         pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
+        return "Super zapisany!!!";
     }
 
 
@@ -45,6 +46,7 @@ public class PracownikStudiaController {
     public void deletePracownikStudia (@PathVariable("pracownikStudiaId") Long pracownikStudiaID) {
         pracownikStudiaService.deletePracownikStudia(pracownikStudiaID);
     }
+
 
     @PutMapping(path = "{pracownikStudiaId}")
     public void updatePracownikStudia(
