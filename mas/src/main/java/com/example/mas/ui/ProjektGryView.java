@@ -5,6 +5,7 @@ import com.example.mas.projektGry.ProjektGryDTO;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.CellFocusEvent;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
@@ -18,6 +19,8 @@ import java.util.List;
 @Route("projekt-gry-view")
 public class ProjektGryView extends VerticalLayout {
     private final RestTemplate restTemplate;
+    private final Button homePageButton = new Button("Strona główna");
+
 
     public ProjektGryView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -64,6 +67,16 @@ public class ProjektGryView extends VerticalLayout {
             });
             return editButton;
         })).setHeader("Akcja");
+
+
+        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+
+        HorizontalLayout buttonLayout = new HorizontalLayout(homePageButton);
+
+
+        add(homePageButton, buttonLayout);
+        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        setSizeFull();
 
         TextArea readonlyArea = new TextArea();
         readonlyArea.setReadOnly(true);

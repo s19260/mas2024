@@ -63,9 +63,9 @@ public class EditPracownikStudiaView extends VerticalLayout implements BeforeEnt
             restTemplate.put(url + "?imie=" + nameField.getValue()
                     + "&nazwisko=" + nazwiskoField.getValue(), null);
             Notification.show("Pracownik zedytowany pomyslnie", 3000, Notification.Position.MIDDLE);
-            getUI().ifPresent(ui -> ui.navigate("pracownik-studia-view"));
+            getUI().ifPresent(ui -> ui.navigate("/"));
         } catch (Exception ex) {
-            Notification.show("Wystapil blad podczas zapisy " + ex.getMessage(), 3000, Notification.Position.MIDDLE);
+            Notification.show("Wystapil blad podczas zapisu " + ex.getMessage(), 3000, Notification.Position.MIDDLE);
         }
     }
 

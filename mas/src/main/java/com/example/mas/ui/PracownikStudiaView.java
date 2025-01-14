@@ -12,6 +12,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
@@ -25,6 +26,8 @@ import java.util.List;
 @Route("pracownik-studia-view")
 public class PracownikStudiaView extends VerticalLayout {
     private final RestTemplate restTemplate;
+    private final Button homePageButton = new Button("Strona główna");
+
 
     public PracownikStudiaView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -73,6 +76,15 @@ public class PracownikStudiaView extends VerticalLayout {
             return deleteButton;
 
         })).setHeader("Usuniecie");
+
+        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+
+        HorizontalLayout buttonLayout = new HorizontalLayout(homePageButton);
+
+
+        add(homePageButton, buttonLayout);
+        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        setSizeFull();
 
         TextArea readonlyArea = new TextArea();
         readonlyArea.setReadOnly(true);
