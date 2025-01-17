@@ -32,8 +32,15 @@ public class ProjektGryView extends VerticalLayout {
         grid.setItems(projektGryList);
 
         grid.addColumn(ProjektGryDTO::getId).setHeader("ID Projektu").setSortable(true);
-        grid.addColumn(pg -> pg.getLiderZespolu().getImie()).setHeader("Imie lidera").setSortable(true);
-        grid.addColumn(ProjektGryDTO::getId).setHeader("ID Projektu").setSortable(true);
+
+        grid.addColumn(pg ->
+        {
+            if(pg.getLiderZespolu() != null){
+            return pg.getLiderZespolu().getImie() + " " + pg.getLiderZespolu().getNazwisko();
+            }
+            else
+                return "";
+        }).setHeader("Lider").setSortable(true);
         grid.addColumn(ProjektGryDTO::getBudzet).setHeader("Budzet projektu");
         grid.addColumn(ProjektGryDTO::getKosztMarketingu).setHeader("Koszt marketingu");
         grid.addColumn(ProjektGryDTO::getKosztUtrzymaniaZespolu).setHeader("Koszt utrzymania zespolu");

@@ -30,15 +30,15 @@ public class ProjektGryConfig {
             ProjektGry crash = new ProjektGry(
                     liderZespoluRepository.findLiderZespoluById(1L).get(),
                     12L,
-                    1,
+                    3,
                     2,
                     "Xbox"
             );
 
             ProjektGry lol = new ProjektGry(
                     liderZespoluRepository.findLiderZespoluById(1L).get(),
-                    20000L,
-                    100,
+                    40L,
+                    10,
                     27689,
                     "PC"
             );

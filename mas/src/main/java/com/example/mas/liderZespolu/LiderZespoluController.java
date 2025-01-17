@@ -20,6 +20,10 @@ public class LiderZespoluController {
     public List<LiderZespolu> getLiderZespolu() {
         return liderZespoluService.getLiderZespolu();
     }
+    @GetMapping(path = "/all")
+    public List<LiderZespoluDTO> getLiderZespoluDTO() {
+        return liderZespoluService.getLiderZespoluDTO();
+    }
 
     @PostMapping
     public void registerNewLiderZespolu (@RequestBody LiderZespolu liderZespolu) {

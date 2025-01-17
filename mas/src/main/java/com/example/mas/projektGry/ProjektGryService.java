@@ -1,5 +1,7 @@
 package com.example.mas.projektGry;
 
+import com.example.mas.liderZespolu.LiderZespolu;
+import com.example.mas.liderZespolu.LiderZespoluService;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository;
 import jakarta.transaction.Transactional;
@@ -17,12 +19,14 @@ public class ProjektGryService {
     private final ProjektGryRepository projektGryRepository;
     private final PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository;
     private final ProjektGryMapper projektGryMapper;
+    private final LiderZespoluService liderZespoluService;
 
     @Autowired
-    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper) {
+    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper, LiderZespoluService liderZespoluService) {
         this.projektGryRepository = projektGryRepository;
         this.przedstawicielWydawcyRepository = przedstawicielWydawcyRepository;
         this.projektGryMapper = projektGryMapper;
+        this.liderZespoluService = liderZespoluService;
     }
 
     public List<ProjektGryDTO> getAllProjektGry() {
@@ -76,13 +80,15 @@ public class ProjektGryService {
         return projektGryMapper.toDto(projektGry);
     }
 
-    public void updateProjektGry(Long projektGryId, String sprzet, Long budzet, double kosztMarketingu, double kosztUtrzymania) {
+    public void updateProjektGry(Long projektGryId, String sprzet, Long budzet, double kosztMarketingu, double kosztUtrzymania, Long liderZespoluID) {
         ProjektGry projektGry = projektGryRepository.findProjektGryById(projektGryId).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
 
+        LiderZespolu lider = liderZespoluService.getLiderZespoluById(liderZespoluID);
         projektGry.setBudzet(budzet);
         projektGry.setKosztUtrzymaniaZespolu(kosztUtrzymania);
         projektGry.setKosztMarketingu(kosztMarketingu);
         projektGry.setWymaganySprzet(sprzet);
+        projektGry.setLiderZespolu(lider);
         projektGryRepository.save(projektGry);
     }
 

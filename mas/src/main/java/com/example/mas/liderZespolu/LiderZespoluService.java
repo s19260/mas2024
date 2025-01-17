@@ -6,20 +6,32 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class LiderZespoluService {
 
     private final com.example.mas.liderZespolu.LiderZespoluRepository liderZespoluRepository;
+    private final LiderZespoluMapper liderZespoluMapper;
 
     @Autowired
-    public LiderZespoluService(com.example.mas.liderZespolu.LiderZespoluRepository liderZespoluRepository) {
+    public LiderZespoluService(com.example.mas.liderZespolu.LiderZespoluRepository liderZespoluRepository, LiderZespoluMapper liderZespoluMapper) {
+        this.liderZespoluMapper = liderZespoluMapper;
         this.liderZespoluRepository = liderZespoluRepository;
     }
 
     public List<com.example.mas.liderZespolu.LiderZespolu> getLiderZespolu() {
         return liderZespoluRepository.findAll();
     }
+
+    public List<com.example.mas.liderZespolu.LiderZespoluDTO> getLiderZespoluDTO() {
+        return liderZespoluRepository.findAll().stream().map(liderZespoluMapper::toDto).collect(Collectors.toList());
+    }
+
+    public LiderZespolu getLiderZespoluById(Long id) {
+        return liderZespoluRepository.findById(id).orElse(null);
+    }
+
 
     public void addNewLiderZespolu(com.example.mas.liderZespolu.LiderZespolu liderZespolu) {
         System.out.println(liderZespolu);

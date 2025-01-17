@@ -1,5 +1,8 @@
 package com.example.mas.projektGry;
 
+import com.example.mas.pracownikStudia.PracownikStudia;
+import com.example.mas.pracownikStudia.PracownikStudiaRepository;
+import com.example.mas.pracownikStudia.PracownikStudiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +15,16 @@ public class ProjektGryController {
 
 
     private final ProjektGryService projektGryService;
+    private final ProjektGryRepository projektGryRepository;
+    private final PracownikStudiaRepository pracownikStudiaRepository;
+    private final PracownikStudiaService pracownikStudiaService;
 
     @Autowired
-    public ProjektGryController(ProjektGryService projektGryService) {
+    public ProjektGryController(ProjektGryService projektGryService, ProjektGryRepository projektGryRepository, PracownikStudiaRepository pracownikStudiaRepository, PracownikStudiaService pracownikStudiaService) {
         this.projektGryService = projektGryService;
+        this.projektGryRepository = projektGryRepository;
+        this.pracownikStudiaRepository = pracownikStudiaRepository;
+        this.pracownikStudiaService = pracownikStudiaService;
     }
 
     @GetMapping
@@ -37,7 +46,12 @@ public class ProjektGryController {
 
     @DeleteMapping(path = "{projektGryId}")
     public void deleteProjektGry (@PathVariable("projektGryId") Long projektGryID) {
-        projektGryService.deleteProjektGry(projektGryID);
+        ProjektGry pg = projektGryRepository.findProjektGryById(projektGryID).get();
+        List<PracownikStudia> pracownicy =
+        pg.setLiderZespolu(null);
+        pg.setPrzypisaniPracownicy(null);
+        projektGryRepository.saveAndFlush(pg);
+        projektGryRepository.delete(pg);
     }
 
     @PutMapping(path = "{projektGryId}")
@@ -46,9 +60,10 @@ public class ProjektGryController {
             @RequestParam("sprzet") String sprzet,
             @RequestParam("budzet") Long budzet,
             @RequestParam("kosztMarketingu") double kosztMarketingu,
-            @RequestParam("kosztUtrzymania") double kosztUtrzymania
+            @RequestParam("kosztUtrzymania") double kosztUtrzymania,
+            @RequestParam("liderZespoluId") Long liderZespoluID
             ) {
-        projektGryService.updateProjektGry(projektGryId, sprzet, budzet, kosztMarketingu, kosztUtrzymania);
+        projektGryService.updateProjektGry(projektGryId, sprzet, budzet, kosztMarketingu, kosztUtrzymania, liderZespoluID);
   }
 
     @PutMapping("/{projektGryId}/assign-to/{przedstawicielWydawcyId}")

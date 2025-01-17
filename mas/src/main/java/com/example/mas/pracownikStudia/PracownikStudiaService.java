@@ -53,6 +53,10 @@ public class PracownikStudiaService {
         return pracownikStudiaMapper.toDto(ps);
     }
 
+    public List<PracownikStudia> findPracownikStudiaByProjektId(Long projektId) {
+
+    }
+
     public void deletePracownikStudia(Long pracownikStudiaId) {
         boolean exists = pracownikStudiaRepository.existsById(pracownikStudiaId);
         if(!exists){
@@ -70,6 +74,8 @@ public class PracownikStudiaService {
                 System.out.println("dupa " + projekty);
                 projekty.stream().forEach(projektGry -> {
                     projektGry.setLiderZespolu(null);
+                    projektGryRepository.save(projektGry);
+
                 });
             }
            }

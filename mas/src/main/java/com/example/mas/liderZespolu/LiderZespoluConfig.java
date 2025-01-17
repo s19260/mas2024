@@ -26,9 +26,18 @@ public class LiderZespoluConfig {
                     List.of("java", "test123")
             );
 
+            LiderZespolu janek = new LiderZespolu(
+                    "Janek",
+                    "Muzykant",
+                    LocalDate.of(2024, Month.NOVEMBER, 5),
+                    "Dolna 52, Warszawa",
+                    true,
+                    12,
+                    List.of("java", "test123")
+            );
 
             repository.saveAll(
-                    List.of(justyna)
+                    List.of(justyna, janek)
             );
         };
     }

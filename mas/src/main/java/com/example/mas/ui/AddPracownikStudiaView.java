@@ -39,19 +39,19 @@ public class AddPracownikStudiaView extends VerticalLayout {
         this.restTemplate = restTemplate;
 
 
-
+        cancelButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
         addButton.addClickListener(e ->  {
-            PracownikStudiaDTO a = registerNewPracownikStudia();
-//            if (a.getImie() == null || a.getNazwisko() == null) {
-//                Notification.show("Brak wymaganych danych :(", 3000, Notification.Position.MIDDLE);
-//
-//            }
-//            else {
-//                Notification.show("Pracownik " + a.getImie() + " " + a.getNazwisko() + " dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
-//                getUI().ifPresent(ui -> ui.navigate("/"));
-//
-//            }
-        });
+            PracownikStudiaDTO pracownik = registerNewPracownikStudia();
+           if (pracownik.getImie() == null || pracownik.getNazwisko() == null) {
+               Notification.show("Brak wymaganych danych :(", 3000, Notification.Position.MIDDLE);
+
+           }
+           else {
+               Notification.show("Pracownik " + pracownik.getImie() + " " + pracownik.getNazwisko() + " dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
+               getUI().ifPresent(ui -> ui.navigate("/"));
+
+           }
+     });
 
         HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton, addButton);
         add(imieField, nazwiskoField, buttonLayout);
