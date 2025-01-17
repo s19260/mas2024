@@ -2,6 +2,7 @@ package com.example.mas.projektGry;
 
 import com.example.mas.liderZespolu.LiderZespolu;
 import com.example.mas.liderZespolu.LiderZespoluService;
+import com.example.mas.pracownikStudia.PracownikStudiaRepository;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository;
 import jakarta.transaction.Transactional;
@@ -19,13 +20,15 @@ public class ProjektGryService {
     private final PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository;
     private final ProjektGryMapper projektGryMapper;
     private final LiderZespoluService liderZespoluService;
+    private final PracownikStudiaRepository pracownikStudiaRepository;
 
     @Autowired
-    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper, LiderZespoluService liderZespoluService) {
+    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper, LiderZespoluService liderZespoluService, PracownikStudiaRepository pracownikStudiaRepository) {
         this.projektGryRepository = projektGryRepository;
         this.przedstawicielWydawcyRepository = przedstawicielWydawcyRepository;
         this.projektGryMapper = projektGryMapper;
         this.liderZespoluService = liderZespoluService;
+        this.pracownikStudiaRepository = pracownikStudiaRepository;
     }
 
     public List<ProjektGryDTO> getAllProjektGry() {
@@ -53,6 +56,9 @@ public class ProjektGryService {
             throw new IllegalStateException(
                     "ProjektGry " + projektGryId + " nie istnieje");
         }
+        pracownikStudiaRepository.findAllByProjektGryId(projektGryId).forEach(pracownikStudiaRepository::delete);
+
+        
         projektGryRepository.deleteById(projektGryId);
     }
 

@@ -28,15 +28,15 @@ public class ProjektGryConfig {
                                                   PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository,
                                                   GraRepository graRepository) {
         return args -> {
-//            Set<PracownikStudia> przypisaniPracownicy = new HashSet<>();
-//            przypisaniPracownicy.addAll(pracownikStudiaRepository.findAll());
+        Set<PracownikStudia> przypisaniPracownicy = new HashSet<>();
+        przypisaniPracownicy.addAll(pracownikStudiaRepository.findAll());
             ProjektGry crash = new ProjektGry(
                     liderZespoluRepository.findLiderZespoluById(1L).get(),
                     12L,
                     3,
                     2,
-                    "Xbox"
-//                    przypisaniPracownicy
+                    "Xbox",
+                   przypisaniPracownicy
             );
 
             ProjektGry lol = new ProjektGry(

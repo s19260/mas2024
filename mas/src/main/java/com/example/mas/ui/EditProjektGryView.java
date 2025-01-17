@@ -6,6 +6,8 @@ import com.example.mas.liderZespolu.LiderZespoluRepository;
 import com.example.mas.pracownikStudia.PracownikStudia;
 import com.example.mas.pracownikStudia.PracownikStudiaDTO;
 import com.example.mas.projektGry.ProjektGryDTO;
+import com.example.mas.projektGry.ProjektGryRepository;
+import com.example.mas.projektGry.ProjektGryService;
 import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -39,10 +41,12 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
     private final Button saveButton = new Button("Zapisz");
     private final Button cancelButton = new Button("Cofnij");
     private final Button deleteButton = new Button("Usun projekt");
+    private final ProjektGryRepository projektGryRepository;
+    private final ProjektGryService projektGryService;
 
     private String projektId;
 
-    public EditProjektGryView(RestTemplate restTemplate) {
+    public EditProjektGryView(RestTemplate restTemplate, ProjektGryRepository projektGryRepository, ProjektGryService projektGryService) {
         this.restTemplate = restTemplate;
 
         idField.isReadOnly();
@@ -71,6 +75,8 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
         add(idField, liderZespoluComboBox, budzetField, kosztMarketinguField, kosztUtrzymaniaZespoluField, wymaganySprzetField, deleteButton, buttonLayout);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         setSizeFull();
+        this.projektGryRepository = projektGryRepository;
+        this.projektGryService = projektGryService;
     }
 
     private void loadProjektGry(Long id) {
@@ -121,6 +127,7 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
         }
         try {
             String url = "http://localhost:8080/api/v1/projektgry/";
+
 
             restTemplate.delete(url + projektId);
         } catch (Exception ex) {
