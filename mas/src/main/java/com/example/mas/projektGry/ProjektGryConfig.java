@@ -12,6 +12,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.annotation.Order;
 import jakarta.transaction.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,12 +28,15 @@ public class ProjektGryConfig {
                                                   PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository,
                                                   GraRepository graRepository) {
         return args -> {
+//            Set<PracownikStudia> przypisaniPracownicy = new HashSet<>();
+//            przypisaniPracownicy.addAll(pracownikStudiaRepository.findAll());
             ProjektGry crash = new ProjektGry(
                     liderZespoluRepository.findLiderZespoluById(1L).get(),
                     12L,
                     3,
                     2,
                     "Xbox"
+//                    przypisaniPracownicy
             );
 
             ProjektGry lol = new ProjektGry(

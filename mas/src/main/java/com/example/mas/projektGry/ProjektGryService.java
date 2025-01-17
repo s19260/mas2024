@@ -5,7 +5,6 @@ import com.example.mas.liderZespolu.LiderZespoluService;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcy;
 import com.example.mas.przedstawicielWydawcy.PrzedstawicielWydawcyRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,10 @@ public class ProjektGryService {
         ProjektGry projektGry = projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
         return projektGryMapper.toDto(projektGry);
     }
+//    public ProjektGry getProjekt(Long id) {
+//        ProjektGry projektGry = projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
+//        return projektGry;
+//    }
 
 
     public void addNewProjektGry(ProjektGry projektGry) {

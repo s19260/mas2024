@@ -53,9 +53,10 @@ public class PracownikStudiaService {
         return pracownikStudiaMapper.toDto(ps);
     }
 
-    public List<PracownikStudia> findPracownikStudiaByProjektId(Long projektId) {
-
+    public List<PracownikStudia> findAllPracownikStudiaByProjektGryId(Long projektId) {
+        return pracownikStudiaRepository.findByProjektGryId(projektId);
     }
+
 
     public void deletePracownikStudia(Long pracownikStudiaId) {
         boolean exists = pracownikStudiaRepository.existsById(pracownikStudiaId);

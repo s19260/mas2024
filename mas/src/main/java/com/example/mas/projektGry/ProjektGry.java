@@ -62,6 +62,15 @@ public class ProjektGry {
         this.wymaganySprzet = wymaganySprzet;
     }
 
+    public ProjektGry(LiderZespolu liderZespolu, Long budzet, double kosztMarketingu, double kosztUtrzymaniaZespolu, String wymaganySprzet, Set<PracownikStudia> przypisaniPracownicy) {
+        this.liderZespolu = liderZespolu;
+        this.budzet = budzet;
+        this.kosztMarketingu = kosztMarketingu;
+        this.kosztUtrzymaniaZespolu = kosztUtrzymaniaZespolu;
+        this.wymaganySprzet = wymaganySprzet;
+        this.przypisaniPracownicy = przypisaniPracownicy;
+    }
+
 //    public ProjektGry(LiderZespolu liderZespolu) {
 //        this.liderZespolu = liderZespolu;
 //    }

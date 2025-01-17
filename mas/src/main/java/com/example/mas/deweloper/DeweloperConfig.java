@@ -37,7 +37,7 @@ public class DeweloperConfig {
 //                    true,
 //                    12,
 //                    List.of("java", "c#"),
-//                    projektGryRepository.getReferenceById(0L)
+//                    projektGryService.getProjekt(1L)
 //            );
 
             Deweloper adam = new Deweloper(

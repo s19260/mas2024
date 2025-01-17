@@ -24,14 +24,20 @@ public class PracownikStudiaController {
     }
 
     @GetMapping(path = "{pracownikStudiaId}")
-    public PracownikStudiaDTO getPracownikStudia(
+    public PracownikStudiaDTO getPracownikStudiaDTO(
             @PathVariable("pracownikStudiaId") Long pracownikStudiaId
     ) {
         return pracownikStudiaService.getPracownikStudia(pracownikStudiaId);
     }
 
+    @GetMapping("/projekt-gry/{projektGryId}")
+    public List<PracownikStudia> getPracownicyByProjektGry(@PathVariable Long projektGryId) {
+        return pracownikStudiaService.findAllPracownikStudiaByProjektGryId(projektGryId);
+    }
+
+
     @PostMapping
-    public void registerNewPracownikStudia (@RequestBody PracownikStudia pracownikStudia) {
+    public void registerNewPracownikStudiaDTO (@RequestBody PracownikStudia pracownikStudia) {
         pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
     }
 

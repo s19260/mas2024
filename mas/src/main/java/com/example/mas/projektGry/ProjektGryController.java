@@ -1,6 +1,5 @@
 package com.example.mas.projektGry;
 
-import com.example.mas.pracownikStudia.PracownikStudia;
 import com.example.mas.pracownikStudia.PracownikStudiaRepository;
 import com.example.mas.pracownikStudia.PracownikStudiaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class ProjektGryController {
     @DeleteMapping(path = "{projektGryId}")
     public void deleteProjektGry (@PathVariable("projektGryId") Long projektGryID) {
         ProjektGry pg = projektGryRepository.findProjektGryById(projektGryID).get();
-        List<PracownikStudia> pracownicy =
+        //List<PracownikStudia> pracownicy = pracownikStudiaService
         pg.setLiderZespolu(null);
         pg.setPrzypisaniPracownicy(null);
         projektGryRepository.saveAndFlush(pg);
