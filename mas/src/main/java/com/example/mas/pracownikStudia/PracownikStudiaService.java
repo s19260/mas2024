@@ -54,7 +54,7 @@ public class PracownikStudiaService {
     }
 
     public List<PracownikStudia> findAllPracownikStudiaByProjektGryId(Long projektId) {
-        return pracownikStudiaRepository.findByProjektGryId(projektId);
+        return pracownikStudiaRepository.findAllByProjektGryId(projektId);
     }
 
 
