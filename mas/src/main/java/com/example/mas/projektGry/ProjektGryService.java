@@ -58,7 +58,6 @@ public class ProjektGryService {
         }
         pracownikStudiaRepository.findAllByProjektGryId(projektGryId).forEach(pracownikStudiaRepository::delete);
 
-        
         projektGryRepository.deleteById(projektGryId);
     }
 

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,6 @@ public class DeweloperDTO {
     private String imie;
     private String nazwisko;
     private boolean aktualnyStatusZatrudnienia;
-    private String adresZamieszkania;
+    private LocalDate dataZatrudnienia;
     private List<String> jezykiProgramowania;
 }
