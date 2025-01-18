@@ -6,6 +6,8 @@ import com.example.mas.pracownikStudia.PracownikStudiaDoZapisuDTO;
 import com.example.mas.pracownikStudia.PracownikStudiaRepository;
 import com.example.mas.pracownikStudia.PracownikStudiaService;
 import com.example.mas.projektGry.ProjektGryDTO;
+import com.example.mas.tester.TesterDTO;
+import com.example.mas.testerEndToEnd.TesterEndToEndDTO;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
@@ -75,28 +77,59 @@ public class AddPracownikStudiaView extends VerticalLayout {
 
 
         cancelButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
-        addButton.addClickListener(e ->  {
-            PracownikStudiaDTO pracownik = registerNewPracownikStudia();
-           if (pracownik.getImie() == null || pracownik.getNazwisko() == null) {
-               Notification.show("Brak wymaganych danych :(", 3000, Notification.Position.MIDDLE);
+        addButton.addClickListener(e -> {
+            String stanowisko = stanowiskoComboBox.getValue();
 
-           }
-           else {
-               if (jezykiComboBox.getValue().size() < 2) {
-                   Notification.show("Proszę wybrać co najmniej dwa języki programowania.");
-               } else {
+            if (stanowisko == null) {
+                Notification.show("Proszę wybrać stanowisko.", 3000, Notification.Position.MIDDLE);
+                return;
+            }
 
-                   Notification.show("Pracownik " + pracownik.getImie() + " " + pracownik.getNazwisko() + " dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
-                   getUI().ifPresent(ui -> ui.navigate("/"));
-               }
-           }
-     });
+            PracownikStudiaDTO pracownik = null;
 
-        HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton, addButton);
-        add(imieField, nazwiskoField, stanowiskoComboBox, jezykiComboBox, buttonLayout);
-        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-        setSizeFull();
+            // Register based on selected position
+            if ("Deweloper".equals(stanowisko)) {
+                if (jezykiComboBox.getValue().size() < 2) {
+                    Notification.show("Proszę wybrać co najmniej dwa języki programowania.", 3000, Notification.Position.MIDDLE);
+                    return;
+                }
+                pracownik = registerNewDeweloper();
+            } else if ("Tester".equals(stanowisko)) {
+                pracownik = registerNewTester();
+            } else if ("Tester-End-To-End".equals(stanowisko)) {
+                pracownik = registerNewTesterEndToEnd();
+            }
+
+//            if (pracownik == null || pracownik.getImie() == null || pracownik.getNazwisko() == null) {
+//                Notification.show("Brak wymaganych danych :(", 3000, Notification.Position.MIDDLE);
+//            } else {
+                Notification.show("Pracownik " + pracownik.getImie() + " " + pracownik.getNazwisko() + " dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
+                getUI().ifPresent(ui -> ui.navigate("/"));
+//            }
+        });
     }
+//        addButton.addClickListener(e ->  {
+//            PracownikStudiaDTO pracownik = registerNewPracownikStudia();
+//           if (pracownik.getImie() == null || pracownik.getNazwisko() == null) {
+//               Notification.show("Brak wymaganych danych :(", 3000, Notification.Position.MIDDLE);
+//
+//           }
+//           else {
+//               if (jezykiComboBox.getValue().size() < 2) {
+//                   Notification.show("Proszę wybrać co najmniej dwa języki programowania.");
+//               } else {
+//
+//                   Notification.show("Pracownik " + pracownik.getImie() + " " + pracownik.getNazwisko() + " dodany pomyslnie!", 3000, Notification.Position.MIDDLE);
+//                   getUI().ifPresent(ui -> ui.navigate("/"));
+//               }
+//           }
+//     });
+//
+//        HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton, addButton);
+//        add(imieField, nazwiskoField, stanowiskoComboBox, jezykiComboBox, buttonLayout);
+//        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+//        setSizeFull();
+//    }
 
     public PracownikStudiaDTO registerNewPracownikStudia () {
         String url = "http://localhost:8080/api/v1/pracownikstudia/add-pracownik-studia";
@@ -107,9 +140,22 @@ public class AddPracownikStudiaView extends VerticalLayout {
     }
 
     public DeweloperDTO registerNewDeweloper() {
-        String url = "http://localhost:8080/api/v1/pracownikstudia/add-pracownik-studia";
+        String url = "http://localhost:8080/api/v1/pracownikstudia/add-deweloper";
         DeweloperDoZapisuDTO dto = new DeweloperDoZapisuDTO(imieField.getValue(), nazwiskoField.getValue(), true, LocalDate.now());
         return restTemplate.postForObject(url, dto, DeweloperDTO.class);
     }
+
+    public TesterDTO registerNewTester() {
+        String url = "http://localhost:8080/api/v1/pracownikstudia/add-tester";
+        TesterDTO dto = new TesterDTO(imieField.getValue(), nazwiskoField.getValue(), true, LocalDate.now());
+        return restTemplate.postForObject(url, dto, TesterDTO.class);
+    }
+
+    public TesterDTO registerNewTesterEndToEnd() {
+        String url = "http://localhost:8080/api/v1/pracownikstudia/add-tester";
+        TesterEndToEndDTO dto = new TesterEndToEndDTO(imieField.getValue(), nazwiskoField.getValue(), true, LocalDate.now());
+        return restTemplate.postForObject(url, dto, TesterDTO.class);
+    }
+
 
 }
