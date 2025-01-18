@@ -127,12 +127,11 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
         }
         try {
             String url = "http://localhost:8080/api/v1/projektgry/";
-
-
             restTemplate.delete(url + projektId);
         } catch (Exception ex) {
             Notification.show("Wystąpił błąd podczas zapisu: " + ex.getMessage(), 3000, Notification.Position.MIDDLE);
         }
+        getUI().ifPresent(ui -> ui.navigate("/projekt-gry-view"));
     }
 
     @Override

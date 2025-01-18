@@ -1,5 +1,7 @@
 package com.example.mas.projektGry;
 
+import com.example.mas.gra.Gra;
+import com.example.mas.gra.GraRepository;
 import com.example.mas.liderZespolu.LiderZespolu;
 import com.example.mas.liderZespolu.LiderZespoluService;
 import com.example.mas.pracownikStudia.PracownikStudiaRepository;
@@ -21,14 +23,16 @@ public class ProjektGryService {
     private final ProjektGryMapper projektGryMapper;
     private final LiderZespoluService liderZespoluService;
     private final PracownikStudiaRepository pracownikStudiaRepository;
+    private final GraRepository graRepository;
 
     @Autowired
-    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper, LiderZespoluService liderZespoluService, PracownikStudiaRepository pracownikStudiaRepository) {
+    public ProjektGryService(ProjektGryRepository projektGryRepository, PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository, ProjektGryMapper projektGryMapper, LiderZespoluService liderZespoluService, PracownikStudiaRepository pracownikStudiaRepository, GraRepository graRepository) {
         this.projektGryRepository = projektGryRepository;
         this.przedstawicielWydawcyRepository = przedstawicielWydawcyRepository;
         this.projektGryMapper = projektGryMapper;
         this.liderZespoluService = liderZespoluService;
         this.pracownikStudiaRepository = pracownikStudiaRepository;
+        this.graRepository = graRepository;
     }
 
     public List<ProjektGryDTO> getAllProjektGry() {
@@ -61,6 +65,11 @@ public class ProjektGryService {
             projektGry.removePracownikStudia(pracownikStudia);
             pracownikStudiaRepository.save(pracownikStudia);
         });
+        Gra gra = graRepository.findGraByProjektGryId(projektGryId).orElse(null);
+        if (gra != null) {
+            gra.setProjektGry(null);
+            graRepository.save(gra);
+        }
         projektGryRepository.deleteById(projektGryId);
     }
 

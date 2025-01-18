@@ -13,4 +13,7 @@ public interface GraRepository
  //   @Query("SELECT s FROM Gra s WHERE s.id = ?1")
     Optional<Gra> findGraById(Long id);
 
+    @Query("SELECT s FROM Gra s WHERE s.projektGry.id =?1")
+    Optional<Gra> findGraByProjektGryId(Long id);
+
 }

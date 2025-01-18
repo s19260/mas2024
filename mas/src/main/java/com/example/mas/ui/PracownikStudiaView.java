@@ -86,12 +86,8 @@ public class PracownikStudiaView extends VerticalLayout {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         setSizeFull();
 
-        TextArea readonlyArea = new TextArea();
-        readonlyArea.setReadOnly(true);
-        readonlyArea.setWidth("100%");
-
         grid.setAllRowsVisible(true);
 
-        add(grid, readonlyArea);
+        add(grid);
     }
 }

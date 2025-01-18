@@ -59,12 +59,6 @@ public class ProjektGryView extends VerticalLayout {
                     else
                         return "";
                 }
-//                new ComponentRenderer<>(projekt -> {
-//                    Grid<PracownikStudia> pracownikGrid = new Grid<>(PracownikStudia.class, false);
-//                    pracownikGrid.addColumn(PracownikStudia::getNazwisko).setHeader("Nazwisko");
-//                    pracownikGrid.setItems(projekt.getPrzypisaniPracownicy());
-//                    return pracownikGrid;
-//                })
         ).setHeader("Przypisani pracownicy");
 
         grid.addColumn(new ComponentRenderer<>(projektGry -> {
@@ -85,33 +79,7 @@ public class ProjektGryView extends VerticalLayout {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         setSizeFull();
 
-        TextArea readonlyArea = new TextArea();
-        readonlyArea.setReadOnly(true);
-        readonlyArea.setWidth("100%");
-
-        //to tylko przykladowe
-        grid.addCellFocusListener(event -> {
-            CellFocusEvent.GridSection section = event.getSection();
-            String column = event.getColumn().map(Grid.Column::getHeaderText)
-                    .orElse("Aktualnie niedostępne");
-            String row = event.getItem()
-                    .map(value -> String.valueOf(projektGryList.indexOf(value)))
-                    .orElse("Aktualnie niedostępne");
-            String fullName = event.getItem().map(projektGry -> {
-                if (projektGry.getGra() != null)
-                    return projektGry.getGra().getNazwa();
-                else
-                    return "";
-            }).orElse("Aktualnie niedostępne");
-
-            String eventSummary = String.format(
-                    "Sekcja: %s%nRząd: %s%nKolumna: %s%nGra: %s", section,
-                    row, column, fullName);
-            readonlyArea.setValue(eventSummary);
-        });
-
         grid.setAllRowsVisible(true);
-
-        add(grid, readonlyArea);
+        add(grid);
     }
 }
