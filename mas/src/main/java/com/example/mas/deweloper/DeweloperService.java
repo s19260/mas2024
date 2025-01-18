@@ -1,5 +1,9 @@
 package com.example.mas.deweloper;
 
+import com.example.mas.pracownikStudia.PracownikStudia;
+import com.example.mas.pracownikStudia.PracownikStudiaDTO;
+import com.example.mas.pracownikStudia.PracownikStudiaDoZapisuDTO;
+import com.example.mas.pracownikStudia.PracownikStudiaMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +15,12 @@ import java.util.Objects;
 public class DeweloperService {
 
     private final com.example.mas.deweloper.DeweloperRepository deweloperRepository;
+    private final DeweloperMapper deweloperMapper;
 
     @Autowired
-    public DeweloperService(com.example.mas.deweloper.DeweloperRepository deweloperRepository) {
+    public DeweloperService(com.example.mas.deweloper.DeweloperRepository deweloperRepository, DeweloperMapper deweloperMapper) {
         this.deweloperRepository = deweloperRepository;
+        this.deweloperMapper = deweloperMapper;
     }
 
     public List<com.example.mas.deweloper.Deweloper> getDeweloper() {
@@ -33,6 +39,11 @@ public class DeweloperService {
                     "Pracownik studia " + deweloperId + " nie istnieje");
         }
         deweloperRepository.deleteById(deweloperId);
+    }
+    public DeweloperDTO addNewDeweloper(DeweloperDoZapisuDTO deweloper) {
+        Deweloper d = deweloperMapper.toEntity(deweloper);
+        deweloperRepository.save(d);
+        return deweloperMapper.toDto(d);
     }
 
     @Transactional

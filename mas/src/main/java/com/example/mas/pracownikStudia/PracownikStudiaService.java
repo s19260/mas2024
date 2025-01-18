@@ -72,7 +72,7 @@ public class PracownikStudiaService {
             if(pracownikStudia.getProjektGry().getLiderZespolu().getId() == pracownikStudiaId)
             {
                 List<ProjektGry> projekty = projektGryService.findByLiderZespolu_Id(pracownikStudiaId);
-                System.out.println("dupa " + projekty);
+                System.out.println("buba " + projekty);
                 projekty.stream().forEach(projektGry -> {
                     projektGry.setLiderZespolu(null);
                     projektGryRepository.save(projektGry);

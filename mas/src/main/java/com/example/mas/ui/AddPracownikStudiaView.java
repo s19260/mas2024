@@ -1,4 +1,6 @@
 package com.example.mas.ui;
+import com.example.mas.deweloper.DeweloperDTO;
+import com.example.mas.deweloper.DeweloperDoZapisuDTO;
 import com.example.mas.pracownikStudia.PracownikStudiaDTO;
 import com.example.mas.pracownikStudia.PracownikStudiaDoZapisuDTO;
 import com.example.mas.pracownikStudia.PracownikStudiaRepository;
@@ -100,11 +102,14 @@ public class AddPracownikStudiaView extends VerticalLayout {
         String url = "http://localhost:8080/api/v1/pracownikstudia/add-pracownik-studia";
         DatePicker dataDodaniaPracownika = new DatePicker("");
         dataDodaniaPracownika.setValue(LocalDate.now());
-
         PracownikStudiaDoZapisuDTO dto = new PracownikStudiaDoZapisuDTO(imieField.getValue(), nazwiskoField.getValue(), true, dataDodaniaPracownika.getValue());
-
         return restTemplate.postForObject(url, dto, PracownikStudiaDTO.class);
+    }
 
+    public DeweloperDTO registerNewDeweloper() {
+        String url = "http://localhost:8080/api/v1/pracownikstudia/add-pracownik-studia";
+        DeweloperDoZapisuDTO dto = new DeweloperDoZapisuDTO(imieField.getValue(), nazwiskoField.getValue(), true, LocalDate.now());
+        return restTemplate.postForObject(url, dto, DeweloperDTO.class);
     }
 
 }
