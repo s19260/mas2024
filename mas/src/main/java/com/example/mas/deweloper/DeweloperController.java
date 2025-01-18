@@ -23,10 +23,10 @@ public class DeweloperController {
         return deweloperService.getDeweloper();
     }
 
-    @PostMapping
-    public void registerNewDeweloper (@RequestBody Deweloper deweloper) {
-        deweloperService.addNewDeweloper(deweloper);
-    }
+//    @PostMapping
+//    public void registerNewDeweloper (@RequestBody Deweloper deweloper) {
+//        deweloperService.addNewDeweloper(deweloper);
+//    }
     @PostMapping
     public void registerNewDeweloperDTO (@RequestBody Deweloper deweloper) {
         deweloperService.addNewDeweloper(deweloper);

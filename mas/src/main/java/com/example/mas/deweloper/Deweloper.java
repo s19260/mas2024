@@ -4,6 +4,7 @@ import com.example.mas.pracownikStudia.PracownikStudia;
 import com.example.mas.projektGry.ProjektGry;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
