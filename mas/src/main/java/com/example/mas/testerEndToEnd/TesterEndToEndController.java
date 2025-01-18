@@ -25,9 +25,9 @@ public class TesterEndToEndController {
         return testerEndToEndService.getTesterEndToEndDTO();
     }
 
-    @PostMapping
-    public void registerNewTesterEndToEnd (@RequestBody TesterEndToEnd testerEndToEnd) {
-        testerEndToEndService.addNewTesterEndToEnd(testerEndToEnd);
+    @PostMapping("/add-tester-end-to-end")
+    public TesterEndToEndDTO registerNewTesterEndToEnd (@RequestBody TesterEndToEndDTO testerEndToEnd) {
+        return testerEndToEndService.addNewTesterEndToEnd(testerEndToEnd);
     }
 
     @DeleteMapping(path = "{testerEndToEndId}")

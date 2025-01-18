@@ -57,6 +57,9 @@ public class PracownikStudiaService {
         return pracownikStudiaRepository.findAllByProjektGryId(projektId);
     }
 
+    public List<Long> findPracownikIdByProjektGryId(Long projektId) {
+        return pracownikStudiaRepository.findPracownikIdByProjektGryId(projektId);
+    }
 
     public void deletePracownikStudia(Long pracownikStudiaId) {
         boolean exists = pracownikStudiaRepository.existsById(pracownikStudiaId);

@@ -33,7 +33,7 @@ public class DeweloperController {
     }
 
     @PostMapping(path = "/add-deweloper")
-    public DeweloperDTO registerNewDeweloper (@RequestBody DeweloperDoZapisuDTO deweloper) {
+    public DeweloperDTO registerNewDeweloper (@RequestBody DeweloperDTO deweloper) {
         return deweloperService.addNewDeweloper(deweloper);
     }
 

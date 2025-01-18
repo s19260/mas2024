@@ -40,7 +40,7 @@ public class DeweloperService {
         }
         deweloperRepository.deleteById(deweloperId);
     }
-    public DeweloperDTO addNewDeweloper(DeweloperDoZapisuDTO deweloper) {
+    public DeweloperDTO addNewDeweloper(DeweloperDTO deweloper) {
         Deweloper d = deweloperMapper.toEntity(deweloper);
         deweloperRepository.save(d);
         return deweloperMapper.toDto(d);

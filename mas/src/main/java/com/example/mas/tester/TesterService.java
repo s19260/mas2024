@@ -33,9 +33,10 @@ public class TesterService {
     }
 
 
-    public void addNewTester(com.example.mas.tester.Tester tester) {
+    public TesterDTO addNewTester(TesterDTO tester) {
         System.out.println(tester);
-        testerRepository.save(tester);
+        Tester testerEntity = testerMapper.toEntity(tester);
+        return testerMapper.toDto(testerRepository.save(testerEntity));
     }
 
     public void deleteTester(Long testerId) {

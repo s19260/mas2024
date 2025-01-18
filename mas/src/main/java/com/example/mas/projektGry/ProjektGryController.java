@@ -14,16 +14,11 @@ public class ProjektGryController {
 
 
     private final ProjektGryService projektGryService;
-    private final ProjektGryRepository projektGryRepository;
-    private final PracownikStudiaRepository pracownikStudiaRepository;
-    private final PracownikStudiaService pracownikStudiaService;
+
 
     @Autowired
-    public ProjektGryController(ProjektGryService projektGryService, ProjektGryRepository projektGryRepository, PracownikStudiaRepository pracownikStudiaRepository, PracownikStudiaService pracownikStudiaService) {
+    public ProjektGryController(ProjektGryService projektGryService) {
         this.projektGryService = projektGryService;
-        this.projektGryRepository = projektGryRepository;
-        this.pracownikStudiaRepository = pracownikStudiaRepository;
-        this.pracownikStudiaService = pracownikStudiaService;
     }
 
     @GetMapping
@@ -45,12 +40,7 @@ public class ProjektGryController {
 
     @DeleteMapping(path = "{projektGryId}")
     public void deleteProjektGry (@PathVariable("projektGryId") Long projektGryID) {
-        ProjektGry pg = projektGryRepository.findProjektGryById(projektGryID).get();
-        //List<PracownikStudia> pracownicy = pracownikStudiaService
-        pg.setLiderZespolu(null);
-        pg.setPrzypisaniPracownicy(null);
-        projektGryRepository.saveAndFlush(pg);
-        projektGryRepository.delete(pg);
+        projektGryService.deleteProjektGry(projektGryID);
     }
 
     @PutMapping(path = "{projektGryId}")

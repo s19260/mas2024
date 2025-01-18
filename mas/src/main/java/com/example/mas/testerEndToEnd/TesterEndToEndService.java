@@ -33,9 +33,10 @@ public class TesterEndToEndService {
     }
 
 
-    public void addNewTesterEndToEnd(com.example.mas.testerEndToEnd.TesterEndToEnd testerEndToEnd) {
+    public TesterEndToEndDTO addNewTesterEndToEnd(TesterEndToEndDTO testerEndToEnd) {
         System.out.println(testerEndToEnd);
-        testerEndToEndRepository.save(testerEndToEnd);
+        TesterEndToEnd testerEndToEnd1 = testerEndToEndMapper.toEntity(testerEndToEnd);
+        return testerEndToEndMapper.toDto(testerEndToEndRepository.save(testerEndToEnd1));
     }
 
     public void deleteTesterEndToEnd(Long testerEndToEndId) {

@@ -56,8 +56,11 @@ public class ProjektGryService {
             throw new IllegalStateException(
                     "ProjektGry " + projektGryId + " nie istnieje");
         }
-        pracownikStudiaRepository.findAllByProjektGryId(projektGryId).forEach(pracownikStudiaRepository::delete);
-
+        ProjektGry projektGry = projektGryRepository.findProjektGryById(projektGryId).orElse(null);
+        pracownikStudiaRepository.findAllByProjektGryId(projektGryId).stream().forEach(pracownikStudia -> {
+            projektGry.removePracownikStudia(pracownikStudia);
+            pracownikStudiaRepository.save(pracownikStudia);
+        });
         projektGryRepository.deleteById(projektGryId);
     }
 

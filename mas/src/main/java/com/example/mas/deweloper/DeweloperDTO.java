@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeweloperDTO {
-    private Long id;
     private String imie;
     private String nazwisko;
     private boolean aktualnyStatusZatrudnienia;

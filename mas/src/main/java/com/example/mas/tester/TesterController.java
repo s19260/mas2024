@@ -25,9 +25,9 @@ public class TesterController {
         return testerService.getTesterDTO();
     }
 
-    @PostMapping
-    public void registerNewTester (@RequestBody Tester tester) {
-        testerService.addNewTester(tester);
+    @PostMapping("/add-tester")
+    public TesterDTO registerNewTester (@RequestBody TesterDTO tester) {
+       return testerService.addNewTester(tester);
     }
 
     @DeleteMapping(path = "{testerId}")

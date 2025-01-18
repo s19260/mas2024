@@ -20,4 +20,7 @@ public interface PracownikStudiaRepository
     @Query("SELECT s FROM PracownikStudia s WHERE s.projektGry.id = ?1")
     List<PracownikStudia> findAllByProjektGryId(Long projektGryId);
 
+    @Query("SELECT s.id FROM PracownikStudia s WHERE s.projektGry.id = ?1")
+    List<Long> findPracownikIdByProjektGryId(Long projektGryId);
+
 }

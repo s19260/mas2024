@@ -15,7 +15,7 @@ public class DeweloperMapper {
         return modelMapper.map(entity, DeweloperDTO.class);
     }
 
-    public Deweloper toEntity(DeweloperDoZapisuDTO dto){
+    public Deweloper toEntity(DeweloperDTO dto){
         return modelMapper.map(dto, Deweloper.class);
     }
 
