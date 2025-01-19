@@ -55,9 +55,12 @@ public class ProjektGryConfig {
             PracownikStudia pracownikStudia1 = pracownikStudiaRepository.findPracownikStudiaById(4L).get();
            PracownikStudia pracownikStudia2 = pracownikStudiaRepository.findPracownikStudiaById(2L).get();
             PracownikStudia pracownikStudia3 = pracownikStudiaRepository.findPracownikStudiaById(3L).get();
+            PracownikStudia pracownikStudia4 = pracownikStudiaRepository.findPracownikStudiaById(1L).get();
+            lol.addPracownikStudia(pracownikStudia4);
             lol.addPracownikStudia(pracownikStudia1);
             lol2.addPracownikStudia(pracownikStudia2);
             crash.addPracownikStudia(pracownikStudia3);
+            pracownikStudia4.setProjektGry(lol);
            pracownikStudia2.setProjektGry(lol2);
             pracownikStudia3.setProjektGry(crash);
 
@@ -78,6 +81,7 @@ public class ProjektGryConfig {
             pracownikStudiaRepository.save(pracownikStudia1);
             pracownikStudiaRepository.save(pracownikStudia2);
             pracownikStudiaRepository.save(pracownikStudia3);
+            pracownikStudiaRepository.save(pracownikStudia4);
             przedstawicielWydawcyRepository.save(przedstawicielWydawcy);
         };
     }
