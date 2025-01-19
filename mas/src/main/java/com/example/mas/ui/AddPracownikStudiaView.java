@@ -107,7 +107,7 @@ public class AddPracownikStudiaView extends VerticalLayout {
 
 
 
-            getUI().ifPresent(ui -> ui.navigate("/"));
+            getUI().ifPresent(ui -> ui.navigate("/home"));
         }
         });
 

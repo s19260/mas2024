@@ -48,8 +48,18 @@ public class DeweloperConfig {
                     List.of("c++", "c")
             );
 
+            Deweloper ania = new Deweloper(
+                    "Anna",
+                    "Kowalska",
+                    LocalDate.of(2023, Month.APRIL, 22),
+                    "Jana Kazimierza 12, Warszawa",
+                    true,
+                    3,
+                    List.of("c++", "c")
+            );
+
             repository.saveAll(
-                    List.of(marcin, adam, krzys)
+                    List.of(marcin, adam, krzys, ania)
             );
         };
     }

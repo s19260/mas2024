@@ -14,9 +14,10 @@ import org.springframework.web.client.RestTemplate;
 public class HomePageView extends VerticalLayout {
     private final RestTemplate restTemplate;
 
-    private final Button widokPracownikaButton = new Button("Przejdz do widoku pracownika");
-    private final Button widokProjektuButton = new Button("Przejdz do widoku projektu");
+    private final Button widokPracownikaButton = new Button("Przejdz do widoku edycji pracownika");
+    private final Button widokProjektuButton = new Button("Przejdz do widoku edycji projektu");
     private final Button widokDodawaniaPracownikaButton = new Button(("Dodaj nowego pracownika"));
+    private final Button widokDodawaniaProjektuButton = new Button("Dodaj nowy projekt");
 
     public HomePageView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -25,10 +26,11 @@ public class HomePageView extends VerticalLayout {
         widokPracownikaButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("pracownik-studia-view")));
         widokProjektuButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("projekt-gry-view")));
         widokDodawaniaPracownikaButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("dodaj-pracownika-studia")));
+        widokDodawaniaProjektuButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("dodaj-projekt-gry")));
 
         Footer footer = new Footer();
 
-        HorizontalLayout buttonLayout = new HorizontalLayout(widokDodawaniaPracownikaButton, widokPracownikaButton, widokProjektuButton);
+        HorizontalLayout buttonLayout = new HorizontalLayout(widokDodawaniaPracownikaButton, widokPracownikaButton, widokProjektuButton, widokDodawaniaProjektuButton);
         buttonLayout.setAlignItems(Alignment.CENTER);
         buttonLayout.setSpacing(true);
         buttonLayout.setSizeFull();

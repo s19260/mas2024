@@ -36,12 +36,8 @@ public class AddProjektGryView extends VerticalLayout  {
 
     private final Button addButton = new Button("Zapisz");
     private final Button cancelButton = new Button("Cofnij");
-  //  private final LiderZespoluMapper liderZespoluMapper;
 
     private String projektId;
-
-
-
 
     public AddProjektGryView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -52,9 +48,6 @@ public class AddProjektGryView extends VerticalLayout  {
                 "http://localhost:8080/api/v1/gra/getAllGryNull", GraDTO[].class);
         List<GraDTO> gry = Arrays.asList(responseEntity.getBody());
 
-
-
-
         graDTOComboBox.setItems(gry);
         graDTOComboBox.setItemLabelGenerator(new ItemLabelGenerator<GraDTO>() {
             @Override
@@ -62,7 +55,6 @@ public class AddProjektGryView extends VerticalLayout  {
                 return graDTO.getNazwa();
             }
         });
-
 
         addButton.addClickListener(e -> {
             if(budzetField.getValue() == null || budzetField.getValue().equals("")
@@ -80,8 +72,8 @@ public class AddProjektGryView extends VerticalLayout  {
                         kosztUtrzymaniaZespoluField.getValue(),
                         wymaganySprzetField.getValue(), graDTOComboBox.getValue() );
                 ProjektGryDoZapisuDTO projektGryPoZapisie = addNewProjektGryDoZapisu(projektGry);
-                Notification.show(projektGryPoZapisie.toString() + " dodany pomyslnie", 3000, Notification.Position.MIDDLE);
-
+                Notification.show("Projekt dodany pomyslnie", 3000, Notification.Position.MIDDLE);
+                getUI().ifPresent(ui -> ui.navigate("/home"));
             }
                 });
 
