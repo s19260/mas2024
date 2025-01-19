@@ -10,7 +10,6 @@ import java.util.List;
 @RequestMapping(path = "api/v1/pracownikstudia")
 public class PracownikStudiaController {
 
-
     private final PracownikStudiaService pracownikStudiaService;
 
     @Autowired
@@ -35,7 +34,6 @@ public class PracownikStudiaController {
         return pracownikStudiaService.findAllPracownikStudiaByProjektGryId(projektGryId);
     }
 
-
     @PostMapping
     public void registerNewPracownikStudiaDTO (@RequestBody PracownikStudia pracownikStudia) {
         pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
@@ -46,15 +44,10 @@ public class PracownikStudiaController {
         return pracownikStudiaService.addNewPracownikStudia(pracownikStudia);
     }
 
-
     @DeleteMapping(path = "{pracownikStudiaId}")
     public void deletePracownikStudia (@PathVariable("pracownikStudiaId") Long pracownikStudiaID) {
-
-
-
         pracownikStudiaService.deletePracownikStudia(pracownikStudiaID);
     }
-
 
     @PutMapping(path = "{pracownikStudiaId}")
     public void updatePracownikStudia(

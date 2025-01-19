@@ -53,8 +53,14 @@ public class AddPracownikStudiaView extends VerticalLayout {
         });
 
         Set<String> wybraneJezyki = new HashSet<>(jezykiComboBox.getValue());
+        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/home")));
 
-        cancelButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+        HorizontalLayout buttonLayout1 = new HorizontalLayout(homePageButton);
+        add(homePageButton, buttonLayout1);
+        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        setSizeFull();
+
+        cancelButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/home")));
         addButton.addClickListener(e -> {
             String stanowisko = stanowiskoComboBox.getValue();
 

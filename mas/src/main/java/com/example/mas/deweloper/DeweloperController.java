@@ -23,10 +23,6 @@ public class DeweloperController {
         return deweloperService.getDeweloper();
     }
 
-//    @PostMapping
-//    public void registerNewDeweloper (@RequestBody Deweloper deweloper) {
-//        deweloperService.addNewDeweloper(deweloper);
-//    }
     @PostMapping
     public void registerNewDeweloperDTO (@RequestBody Deweloper deweloper) {
         deweloperService.addNewDeweloper(deweloper);
@@ -36,8 +32,6 @@ public class DeweloperController {
     public DeweloperDTO registerNewDeweloper (@RequestBody DeweloperDTO deweloper) {
         return deweloperService.addNewDeweloper(deweloper);
     }
-
-
 
     @DeleteMapping(path = "{deweloperId}")
     public void deleteDeweloper (@PathVariable("deweloperId") Long deweloperID) {

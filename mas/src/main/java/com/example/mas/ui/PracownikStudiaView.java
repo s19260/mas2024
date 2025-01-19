@@ -76,7 +76,7 @@ public class PracownikStudiaView extends VerticalLayout {
 
         })).setHeader("Usuniecie");
 
-        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/home")));
 
         HorizontalLayout buttonLayout = new HorizontalLayout(homePageButton);
 

@@ -43,11 +43,6 @@ public class ProjektGryService {
         ProjektGry projektGry = projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
         return projektGryMapper.toDto(projektGry);
     }
-//    public ProjektGry getProjekt(Long id) {
-//        ProjektGry projektGry = projektGryRepository.findProjektGryById(id).orElseThrow(() -> new RuntimeException("Projekt gry nie znaleziony"));
-//        return projektGry;
-//    }
-
 
     public void addNewProjektGry(ProjektGry projektGry) {
         System.out.println(projektGry);

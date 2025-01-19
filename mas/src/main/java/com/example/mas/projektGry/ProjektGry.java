@@ -71,10 +71,6 @@ public class ProjektGry {
         this.przypisaniPracownicy = przypisaniPracownicy;
     }
 
-//    public ProjektGry(LiderZespolu liderZespolu) {
-//        this.liderZespolu = liderZespolu;
-//    }
-
     public void addPracownikStudia(PracownikStudia pracownikStudia){
        przypisaniPracownicy.add(pracownikStudia);
        pracownikStudia.setProjektGry(this);

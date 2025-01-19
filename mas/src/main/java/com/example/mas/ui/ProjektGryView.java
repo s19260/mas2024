@@ -70,7 +70,7 @@ public class ProjektGryView extends VerticalLayout {
         })).setHeader("Akcja");
 
 
-        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+        homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/home")));
 
         HorizontalLayout buttonLayout = new HorizontalLayout(homePageButton);
 
