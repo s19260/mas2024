@@ -48,7 +48,6 @@ public class PracownikStudiaView extends VerticalLayout {
             else return "";
                 }
 
-
         ).setHeader("Aktualny projekt").setSortable(true);
 
         grid.addColumn(new ComponentRenderer<>(pracownikStudia -> {

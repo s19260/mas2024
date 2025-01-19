@@ -15,4 +15,5 @@ public class TesterIntegracyjnyDTO {
     private String nazwisko;
     private boolean aktualnyStatusZatrudnienia;
     private LocalDate dataZatrudnienia;
+    private String adresZamieszkania;
 }

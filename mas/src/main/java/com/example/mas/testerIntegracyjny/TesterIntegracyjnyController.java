@@ -1,5 +1,6 @@
 package com.example.mas.testerIntegracyjny;
 
+import com.example.mas.testerEndToEnd.TesterEndToEndDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,9 +26,9 @@ public class TesterIntegracyjnyController {
         return testerIntegracyjnyService.getTesterIntegracyjnyDTO();
     }
 
-    @PostMapping
-    public void registerNewTesterIntegracyjny (@RequestBody TesterIntegracyjny testerIntegracyjny) {
-        testerIntegracyjnyService.addNewTesterIntegracyjny(testerIntegracyjny);
+    @PostMapping("/add-tester-integracyjny")
+    public TesterIntegracyjnyDTO registerNewTesterIntegracyjnyDTO (@RequestBody TesterIntegracyjnyDTO testerIntegracyjny) {
+        return testerIntegracyjnyService.addNewTesterIntegracyjny(testerIntegracyjny);
     }
 
     @DeleteMapping(path = "{testerIntegracyjnyId}")

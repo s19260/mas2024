@@ -1,6 +1,5 @@
 package com.example.mas.testerIntegracyjny;
 
-import com.example.mas.projektGry.ProjektGry;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

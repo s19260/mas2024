@@ -25,9 +25,9 @@ public class TesterJednostkowyController {
         return testerJednostkowyService.getTesterJednostkowyDTO();
     }
 
-    @PostMapping
-    public void registerNewTesterJednostkowy (@RequestBody TesterJednostkowy testerJednostkowy) {
-        testerJednostkowyService.addNewTesterJednostkowy(testerJednostkowy);
+    @PostMapping("/add-tester-jednostkowy")
+    public TesterJednostkowyDTO registerNewTesterJednostkowy (@RequestBody TesterJednostkowyDTO testerJednostkowy) {
+        return testerJednostkowyService.addNewTesterJednostkowy(testerJednostkowy);
     }
 
     @DeleteMapping(path = "{testerJednostkowyId}")

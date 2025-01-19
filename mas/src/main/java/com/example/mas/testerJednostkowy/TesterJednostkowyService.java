@@ -33,9 +33,10 @@ public class TesterJednostkowyService {
     }
 
 
-    public void addNewTesterJednostkowy(com.example.mas.testerJednostkowy.TesterJednostkowy testerJednostkowy) {
+    public TesterJednostkowyDTO addNewTesterJednostkowy(TesterJednostkowyDTO testerJednostkowy) {
         System.out.println(testerJednostkowy);
-        testerJednostkowyRepository.save(testerJednostkowy);
+        TesterJednostkowy testerJednostkowy1 = testerJednostkowyMapper.toEntity(testerJednostkowy);
+        return testerJednostkowyMapper.toDto(testerJednostkowyRepository.save(testerJednostkowy1));
     }
 
     public void deleteTesterJednostkowy(Long testerJednostkowyId) {

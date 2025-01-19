@@ -33,10 +33,12 @@ public class TesterIntegracyjnyService {
     }
 
 
-    public void addNewTesterIntegracyjny(com.example.mas.testerIntegracyjny.TesterIntegracyjny testerIntegracyjny) {
+    public TesterIntegracyjnyDTO addNewTesterIntegracyjny(TesterIntegracyjnyDTO testerIntegracyjny) {
         System.out.println(testerIntegracyjny);
-        testerIntegracyjnyRepository.save(testerIntegracyjny);
+        TesterIntegracyjny testerIntegracyjny1 = testerIntegracyjnyMapper.toEntity(testerIntegracyjny);
+        return testerIntegracyjnyMapper.toDto(testerIntegracyjnyRepository.save(testerIntegracyjny1));
     }
+
 
     public void deleteTesterIntegracyjny(Long testerIntegracyjnyId) {
         boolean exists = testerIntegracyjnyRepository.existsById(testerIntegracyjnyId);

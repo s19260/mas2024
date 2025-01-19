@@ -18,4 +18,5 @@ public class DeweloperDTO {
     private boolean aktualnyStatusZatrudnienia;
     private LocalDate dataZatrudnienia;
     private List<String> jezykiProgramowania;
+    private String adresZamieszkania;
 }
