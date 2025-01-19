@@ -2,8 +2,11 @@ package com.example.mas.ui;
 
 import com.example.mas.pracownikStudia.PracownikStudia;
 import com.example.mas.projektGry.ProjektGryDTO;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.CellFocusEvent;
+import com.vaadin.flow.component.grid.ColumnPathRenderer;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,12 +18,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Route("projekt-gry-view")
 public class ProjektGryView extends VerticalLayout {
     private final RestTemplate restTemplate;
     private final Button homePageButton = new Button("Strona główna");
-
 
     public ProjektGryView(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -47,19 +50,36 @@ public class ProjektGryView extends VerticalLayout {
         grid.addColumn(ProjektGryDTO::getWymaganySprzet).setHeader("Wymagany sprzet");
         grid.addColumn(projektGry -> {
             if (projektGry.getPrzedstawicielWydawcy() != null)
-                return projektGry.getPrzedstawicielWydawcy().getImie();
+                return projektGry.getPrzedstawicielWydawcy().getImie() + " " + projektGry.getPrzedstawicielWydawcy().getNazwisko();
             else
                 return "";
         }).setHeader("Przedstawiciel wydawcy");
 
-        grid.addColumn(
-                projektGry -> {
-                    if (projektGry.getPrzypisaniPracownicy() != null)
-                        return projektGry.getPrzypisaniPracownicy().stream().map(PracownikStudia::getNazwisko).toList();
-                    else
-                        return "";
+        grid.addColumn(new ComponentRenderer<>(projektGry -> {
+            Button detailsButton = new Button("Pracownicy");
+            detailsButton.addClickListener(event -> {
+                Dialog dialog = new Dialog();
+
+                if (projektGry.getPrzypisaniPracownicy() != null) {
+                    String lider = projektGry.getLiderZespolu().getNazwisko();
+                    String pracownicy = projektGry.getPrzypisaniPracownicy().stream()
+                            .map(PracownikStudia::getNazwisko)
+                            .collect(Collectors.joining(", "));
+
+                    dialog.add(new Text("Przypisani pracownicy: " + lider + ", " + pracownicy));
+                } else {
+                    dialog.add(new Text("Brak przypisanych pracowników"));
                 }
-        ).setHeader("Przypisani pracownicy");
+
+                if (projektGry.getLiderZespolu() != null){
+
+                }
+
+                dialog.open();
+            });
+            return detailsButton;
+        })).setHeader("Dodatkowe informacje");
+
 
         grid.addColumn(new ComponentRenderer<>(projektGry -> {
             Button editButton = new Button("Edytuj");
@@ -68,6 +88,8 @@ public class ProjektGryView extends VerticalLayout {
             });
             return editButton;
         })).setHeader("Akcja");
+
+
 
 
         homePageButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/home")));

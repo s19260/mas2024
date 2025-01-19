@@ -28,18 +28,6 @@ public class DeweloperConfig {
                     List.of("java", "c#")
             );
 
-//            Deweloper jasio = new Deweloper(
-//                    1L,
-//                    "Jasio",
-//                    "Kowalski",
-//                    LocalDate.of(2024, Month.NOVEMBER, 5),
-//                    "Dolna 52, Warszawa",
-//                    true,
-//                    12,
-//                    List.of("java", "c#"),
-//                    projektGryService.getProjekt(1L)
-//            );
-
             Deweloper adam = new Deweloper(
                     "Adam",
                     "Wisniewski",
@@ -50,8 +38,18 @@ public class DeweloperConfig {
                     List.of("c++", "c")
             );
 
+            Deweloper krzys = new Deweloper(
+                    "Krzysztof",
+                    "Adamski",
+                    LocalDate.of(2023, Month.APRIL, 22),
+                    "Jana Kazimierza 12, Warszawa",
+                    true,
+                    3,
+                    List.of("c++", "c")
+            );
+
             repository.saveAll(
-                    List.of(marcin, adam)
+                    List.of(marcin, adam, krzys)
             );
         };
     }

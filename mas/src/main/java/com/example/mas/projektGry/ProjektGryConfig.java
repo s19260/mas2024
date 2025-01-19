@@ -28,44 +28,56 @@ public class ProjektGryConfig {
                                                   PrzedstawicielWydawcyRepository przedstawicielWydawcyRepository,
                                                   GraRepository graRepository) {
         return args -> {
-        Set<PracownikStudia> przypisaniPracownicy = new HashSet<>();
-        przypisaniPracownicy.addAll(pracownikStudiaRepository.findAll());
             ProjektGry crash = new ProjektGry(
                     liderZespoluRepository.findLiderZespoluById(1L).get(),
-                    12L,
-                    3,
-                    2,
-                    "Xbox",
-                   przypisaniPracownicy
+                    12000L,
+                    3000,
+                    2000,
+                    "Xbox"
             );
 
             ProjektGry lol = new ProjektGry(
-                    liderZespoluRepository.findLiderZespoluById(1L).get(),
-                    40L,
-                    10,
-                    27689,
-                    "PC"
+                    liderZespoluRepository.findLiderZespoluById(2L).get(),
+                    40000L,
+                    10000,
+                    15000,
+                    "PC, PS4"
             );
 
-            PracownikStudia pracownikStudia = pracownikStudiaRepository.findPracownikStudiaById(2L).get();
-            PracownikStudia pracownikStudiaLol = pracownikStudiaRepository.findPracownikStudiaById(1L).get();
-            crash.addPracownikStudia(pracownikStudia);
-            pracownikStudia.setProjektGry(crash);
-            pracownikStudiaLol.setProjektGry(lol);
-            lol.addPracownikStudia(pracownikStudiaLol);
+            ProjektGry lol2 = new ProjektGry(
+                    liderZespoluRepository.findLiderZespoluById(1L).get(),
+                    80000L,
+                    20000,
+                    1600,
+                    "PC, XBOX, PS5"
+            );
+
+            PracownikStudia pracownikStudia1 = pracownikStudiaRepository.findPracownikStudiaById(4L).get();
+           PracownikStudia pracownikStudia2 = pracownikStudiaRepository.findPracownikStudiaById(2L).get();
+            PracownikStudia pracownikStudia3 = pracownikStudiaRepository.findPracownikStudiaById(3L).get();
+            lol.addPracownikStudia(pracownikStudia1);
+            lol2.addPracownikStudia(pracownikStudia2);
+            crash.addPracownikStudia(pracownikStudia3);
+           pracownikStudia2.setProjektGry(lol2);
+            pracownikStudia3.setProjektGry(crash);
 
             PrzedstawicielWydawcy przedstawicielWydawcy = przedstawicielWydawcyRepository.findById(2L).get();
 
+            crash.setPrzedstawicielWydawcy(przedstawicielWydawcy);
             lol.setPrzedstawicielWydawcy(przedstawicielWydawcy);
+            lol2.setPrzedstawicielWydawcy(przedstawicielWydawcy);
             przedstawicielWydawcy.addProjektGry(lol);
+            przedstawicielWydawcy.addProjektGry(lol2);
+            przedstawicielWydawcy.addProjektGry(crash);
 
             Gra gra = graRepository.findById(1L).get();
             crash.setGra(gra);
             repository.saveAll(
-                    List.of(crash, lol)
+                    List.of(crash, lol, lol2)
             );
-            pracownikStudiaRepository.save(pracownikStudia);
-            pracownikStudiaRepository.save(pracownikStudiaLol);
+            pracownikStudiaRepository.save(pracownikStudia1);
+            pracownikStudiaRepository.save(pracownikStudia2);
+            pracownikStudiaRepository.save(pracownikStudia3);
             przedstawicielWydawcyRepository.save(przedstawicielWydawcy);
         };
     }

@@ -51,7 +51,6 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
 
         idField.isReadOnly();
         budzetField.setMin(0);
-        kosztMarketinguField.setMin(0);
         kosztUtrzymaniaZespoluField.setMin(0);
 
         ResponseEntity<LiderZespoluDTO[]> responseEntity = restTemplate.getForEntity(
@@ -72,7 +71,7 @@ public class EditProjektGryView extends VerticalLayout implements BeforeEnterObs
         deleteButton.addClickListener(e -> deleteProjektGry());
 
         HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton, saveButton);
-        add(idField, liderZespoluComboBox, budzetField, kosztMarketinguField, kosztUtrzymaniaZespoluField, wymaganySprzetField, deleteButton, buttonLayout);
+        add(idField, liderZespoluComboBox, budzetField,  kosztUtrzymaniaZespoluField, wymaganySprzetField, deleteButton, buttonLayout);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         setSizeFull();
         this.projektGryRepository = projektGryRepository;
