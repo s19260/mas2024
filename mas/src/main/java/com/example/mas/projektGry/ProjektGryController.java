@@ -33,9 +33,9 @@ public class ProjektGryController {
         return projektGryService.getProjektGry(projektGryId);
     }
 
-    @PostMapping
-    public void registerNewProjektGry (@RequestBody ProjektGry projektGry) {
-        projektGryService.addNewProjektGry(projektGry);
+    @PostMapping(path = "/add-projekt-gry")
+    public ProjektGryDoZapisuDTO addNewProjektGryDoZapisu (@RequestBody ProjektGryDoZapisuDTO projektGry) {
+        return projektGryService.addNewProjektGryDoZapisu(projektGry);
     }
 
     @DeleteMapping(path = "{projektGryId}")

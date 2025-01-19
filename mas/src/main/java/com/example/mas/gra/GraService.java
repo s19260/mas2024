@@ -1,29 +1,33 @@
 package com.example.mas.gra;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GraService {
 
     private final GraRepository graRepository;
+    private final GraMapper graMapper;
 
-    @Autowired
-    public GraService(GraRepository graRepository) {
-        this.graRepository = graRepository;
-    }
 
-    public List<Gra> getGra() {
-        return graRepository.findAll();
+    public List<GraDTO> getGra() {
+        return graRepository.findAll().stream().map(graMapper::toDto).collect(Collectors.toList());
     }
 
     public void addNewGra(Gra gra) {
         System.out.println(gra);
         graRepository.save(gra);
+    }
+
+    public List<GraDTO> getGryWhereProjektNull(){
+        return graRepository.findAllGraWhereProjektGryIsNull().stream().map(graMapper::toDto).collect(Collectors.toList());
     }
 
     public void deleteGra(Long graId) {

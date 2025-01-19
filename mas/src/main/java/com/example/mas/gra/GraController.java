@@ -18,8 +18,13 @@ public class GraController {
     }
 
     @GetMapping
-    public List<Gra> getGra() {
+    public List<GraDTO> getGraDTO() {
         return graService.getGra();
+    }
+
+    @GetMapping(path = "/getAllGryNull")
+    public List<GraDTO> getAllGryNull() {
+        return graService.getGryWhereProjektNull();
     }
 
     @PostMapping

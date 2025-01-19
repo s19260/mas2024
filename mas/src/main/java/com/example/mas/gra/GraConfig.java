@@ -24,9 +24,17 @@ public class GraConfig {
                     "Naughty Dog"
             );
 
+            Gra spyro = new Gra(
+                    "Spyro the dragon",
+                    "PS4",
+                    LocalDate.of(1990, Month.MARCH, 25),
+                    "Platformowka",
+                    "Naughty Dog"
+            );
+
 
             repository.saveAll(
-                    List.of(crash)
+                    List.of(crash, spyro)
             );
         };
     }

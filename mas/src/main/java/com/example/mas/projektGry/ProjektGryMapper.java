@@ -13,7 +13,17 @@ public class ProjektGryMapper {
         return modelMapper.map(entity, ProjektGryDTO.class);
     }
 
+    public ProjektGryDoZapisuDTO projektGryDoZapisuDTO(ProjektGry entity){
+        return modelMapper.map(entity, ProjektGryDoZapisuDTO.class);
+    }
+
     public ProjektGry toEntity(ProjektGryDTO dto){
         return modelMapper.map(dto, ProjektGry.class);
     }
+
+    public ProjektGry toEntity(ProjektGryDoZapisuDTO dto){
+        return modelMapper.map(dto, ProjektGry.class);
+    }
+
+
 }

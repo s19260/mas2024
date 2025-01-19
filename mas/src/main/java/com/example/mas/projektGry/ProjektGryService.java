@@ -49,6 +49,13 @@ public class ProjektGryService {
         projektGryRepository.save(projektGry);
     }
 
+    public ProjektGryDoZapisuDTO addNewProjektGryDoZapisu(ProjektGryDoZapisuDTO projektGryDTO) {
+        ProjektGry projektGry = projektGryMapper.toEntity(projektGryDTO);
+        projektGryRepository.save(projektGry);
+        System.out.println(projektGry.toString() + "pupa");
+        return projektGryMapper.projektGryDoZapisuDTO(projektGry);
+    }
+
     public void deleteProjektGry(Long projektGryId) {
         boolean exists = projektGryRepository.existsById(projektGryId);
         if (!exists) {
